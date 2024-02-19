@@ -31,28 +31,16 @@ public class Appointment {
     @Column(name = "APPT_TIME")
     private LocalTime time;
 
-    /**
-     * 1 to many / many to 1 bidirectional
-     *  ManyToOne is always the owning side
-     * Appointment is the owner of this relationship
-     */
+    
     @ManyToOne
     @JoinColumn(name = "MANUFACTURER_ID")
     private Manufacturer manufacturer;
 
-    /**
-     *  many to 1 uni-directional
-     * Appointment is the owning and only side of this relationship
-     */
+   
     @ManyToOne
     @JoinColumn(name = "CAR_ID")
     private Car car;
 
-    /**
-     * 1 to many / many to 1 bidirectional
-     * ManyToOne is always the owning side
-     * Appointment is the owner of this relationship
-     */
     @ManyToOne
     @JoinColumn(name = "SALESSTAFF_ID")
     private Salesstaff salesstaff;

@@ -178,5 +178,5 @@ public class Manufacturer {
         return "Manufacturer{" + "id=" + id + ", email=" + email + ", name=" + name + ", makeDate=" + makeDate + '}';
     }
 
-    // Other methods as needed
+    
 }

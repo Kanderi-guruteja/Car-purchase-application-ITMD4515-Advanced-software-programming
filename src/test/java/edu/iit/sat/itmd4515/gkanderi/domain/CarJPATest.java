@@ -29,7 +29,6 @@ public class CarJPATest extends AbstractJPATest{
 
     @Test
     public void createTest() {
-        // create a new entity
         Car c2 = new Car("merc", LocalDate.of(2022, 12, 10), CarType.Petrol);
         Car c3 = new Car("audi", LocalDate.of(2022, 12, 10), CarType.Diesel);
 
@@ -44,14 +43,13 @@ public class CarJPATest extends AbstractJPATest{
         
         Car readBackFromDatabaseForAssertion = em.find(Car.class, c2.getId());
         assertEquals(c2.getId(), readBackFromDatabaseForAssertion.getId());
-        //clean up data before exiting the method
-    }
+        }
 
     @Test
     public void readTest() {
-         // read test case - you could follow the same design as your JDBC read test, but make sure you use JPA here
+         
     
-    String carNameToRead = "bmw"; // Replace with the actual name to read
+    String carNameToRead = "bmw"; 
 
     tx.begin();
     Car car = em.createQuery("SELECT c FROM Car c WHERE c.name = :name", Car.class)
@@ -70,19 +68,17 @@ public class CarJPATest extends AbstractJPATest{
     @Test
     public void upadteTest() { 
         
-        // working with the beforeEach sample data...
+        
         Car c2 = em.createQuery("select c from Car c where c.name='merc'", Car.class).getSingleResult();
         LocalDate newBuyday = LocalDate.of(2023,10,01);
-        //update something
-        //write it back to DB
-        // using the set methods in a tx updates the database for a managed entity
+       
         tx.begin();
         c2.setBuyDate(newBuyday);
         tx.commit();
-         // read it back from the database
+         
            Car readBackFromDatabaseForAssertion = em.find(Car.class, c2.getId());
            
-           // assert that it was successfully updated
+           
            
          assertEquals(newBuyday, readBackFromDatabaseForAssertion.getBuyDate()); 
          
@@ -90,7 +86,6 @@ public class CarJPATest extends AbstractJPATest{
 
     @Test
     public void deleteTest() { 
-         // delete test case - you could follow the same design as your JDBC delete test, but make sure you use JPA here
           Car audi = em.createQuery("SELECT c FROM Car c WHERE c.name = :name", Car.class)
                 .setParameter("name", "audi")
                 .getResultList()
@@ -104,7 +99,6 @@ public class CarJPATest extends AbstractJPATest{
         em.remove(audi);
         tx.commit();
 
-        // Verify that the entity is deleted
         Car deletedAudi = em.find(Car.class, audi.getId());
         Assertions.assertNull(deletedAudi, "AUDI entity still exists after deletion"); 
     }

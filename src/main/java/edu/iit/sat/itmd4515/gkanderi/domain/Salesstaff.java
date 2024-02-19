@@ -22,11 +22,7 @@ import java.util.Objects;
  */
 @Entity
 public class Salesstaff {
-    
-    /**
-     * one to many : many to one bidirectional relationship
-     * manufacturer is the inverse (non-owning side)
-     */
+  
     @OneToMany(mappedBy = "salesstaff")
     private List<Appointment> appts = new ArrayList<>();
     private Leasingoffice leasingoffice;
@@ -96,10 +92,7 @@ public class Salesstaff {
     
     @Column(name = "SALES_STAFF")
     private String name;
-    /**
-     * 1:1 unidirectional relationship between sales-staff and Leasing-office
-     * sales-staff is the manufacturer
-     */
+    
     @OneToOne
     @JoinColumn(name = "MANUFACTURER_ID")
     private Manufacturer manufacturer;

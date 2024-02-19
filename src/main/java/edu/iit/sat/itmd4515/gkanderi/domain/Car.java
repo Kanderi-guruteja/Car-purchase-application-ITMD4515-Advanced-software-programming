@@ -50,13 +50,7 @@ public class Car {
 @Enumerated(EnumType.STRING)
 private CarType type;
     
-    /**
-     * m:m bi-directional relation ship between manufacturer and car
-     * pet is the inverse  non-owning side of the relationship
-     * this is indicated by mapped by property, which points
-     *to the name of the field in the owning entity 
-     */
-    
+   
 @ManyToMany(mappedBy = "cars")    
 private List<Manufacturer> manufacturers = new ArrayList<>();
 

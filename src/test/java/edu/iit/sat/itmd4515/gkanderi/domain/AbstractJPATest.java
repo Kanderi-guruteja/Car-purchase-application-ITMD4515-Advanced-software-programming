@@ -44,8 +44,7 @@ public class AbstractJPATest {
     @AfterEach
     public void afterEach() {
         
-        // clean up or reset the test data before the next test case
-        //Car c = em.find(Car.class, 1l);
+       
         Car c = em.createQuery("select c from Car c where c.name='bmw'", Car.class).getSingleResult();
 
         tx.begin();
