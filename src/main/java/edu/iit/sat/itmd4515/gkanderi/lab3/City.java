@@ -6,10 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+
 /**
  *
  * @author 18722
  */
+
 @Entity
 public class City {
 

@@ -89,7 +89,7 @@ public class Salesstaff {
     }
     
     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SALES_ID")
     private Long Id;
     
@@ -112,9 +112,7 @@ public class Salesstaff {
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
-     public Leasingoffice getLeasingoffice() {
-        return leasingoffice;
-    }
+
     /**
      * Set the value of manufacturer
      *
@@ -161,14 +159,21 @@ public class Salesstaff {
         this.Id = Id;
     }
 
-  public void setLeasingoffice(Leasingoffice leasingoffice) {
-    this.leasingoffice = leasingoffice;
-    
-    
+    /**
+     * Set the leasing office
+     *
+     * @param leasingoffice the leasing office to set
+     */
+    public void setLeasingoffice(Leasingoffice leasingoffice) {
+        this.leasingoffice = leasingoffice;
+    }
 
-   
+    /**
+     * Get the leasing office
+     *
+     * @return the leasing office
+     */
+    public Leasingoffice getLeasingoffice() {
+        return this.leasingoffice;
+    }
 }
-}
-
-    
-//}
