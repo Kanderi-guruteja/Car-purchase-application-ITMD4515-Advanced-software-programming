@@ -194,6 +194,7 @@ public class Appointment {
     public Long getId() {
         return Id;
     }
+    //all added correct
 
     /**
      * Set the value of Id

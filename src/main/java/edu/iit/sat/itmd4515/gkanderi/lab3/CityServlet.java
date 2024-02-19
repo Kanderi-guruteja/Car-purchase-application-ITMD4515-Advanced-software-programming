@@ -23,6 +23,10 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author 18722
+ */
 @WebServlet(name = "CityServlet", urlPatterns = {"/City", "/Ct", "/C", "/gkanderi-fp/"})
 public class CityServlet extends HttpServlet {
 

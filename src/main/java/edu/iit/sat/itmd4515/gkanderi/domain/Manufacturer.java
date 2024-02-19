@@ -172,7 +172,7 @@ public class Manufacturer {
         }
         return true;
     }
-
+//override
     @Override
     public String toString() {
         return "Manufacturer{" + "id=" + id + ", email=" + email + ", name=" + name + ", makeDate=" + makeDate + '}';
