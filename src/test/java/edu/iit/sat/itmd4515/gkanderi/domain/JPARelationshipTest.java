@@ -54,9 +54,8 @@ public class JPARelationshipTest extends AbstractJPATest{
         em.remove(m);
         tx.commit();
         
-        // New relationship
-        Manufacturer newManufacturer = new Manufacturer("NewManufacturer@none.net", "New Manufacturer", LocalDate.of(2000, 5, 20));
-        Leasingoffice newLeasingoffice = new Leasingoffice("New Leasing Office");
+        Manufacturer newManufacturer = new Manufacturer("carLeasingoffice@none.net", "New Manufacturer", LocalDate.of(2000, 5, 20));
+        Leasingoffice newLeasingoffice = new Leasingoffice("Chicago Car Leasing Office");
         newManufacturer.setLeasingoffice(newLeasingoffice);
         
         tx.begin();
@@ -65,7 +64,8 @@ public class JPARelationshipTest extends AbstractJPATest{
         tx.commit();
         
         Manufacturer newManufacturerFromDB = em.find(Manufacturer.class, newManufacturer.getId());
+        System.out.println("Manufacturer from database: " + newManufacturerFromDB);
         assertNotNull(newManufacturerFromDB.getLeasingoffice());
-        assertEquals("New Leasing Office", newManufacturerFromDB.getLeasingoffice().getLeasingofficeName().trim());
-    }
+        System.out.println("Leasing office from database: " + newManufacturerFromDB.getLeasingoffice());
+        assertEquals("Chicago Car Leasing Office", newManufacturerFromDB.getLeasingoffice().getLeasingofficeName().trim());}
 }
