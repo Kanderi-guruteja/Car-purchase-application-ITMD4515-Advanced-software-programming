@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,72 +18,74 @@ public class Leasingoffice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LEASINGOFFICE_ID")
     private Long id;
+    
+    public Long getId() {
+    return id;
+}
 
     @Column(name = "LEASINGOFFICE_NAME")
     private String leasingofficeName;
-    
+
     @OneToOne(mappedBy = "leasingoffice")
     private Manufacturer manufacturer;
+    
+    
+    // New field for bi-directional relationship with Salesstaff
+    @OneToOne(mappedBy = "leasingoffice")
+    private Salesstaff salesstaff;
 
-    public Leasingoffice() {
-    }
-
-    public Leasingoffice(String leasingofficeName) {
-        this.leasingofficeName = leasingofficeName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // New field for one-to-many relationship with Salesstaff
+    @OneToMany(mappedBy = "leasingoffice")
+    private List<Salesstaff> salesstaffList = new ArrayList<>();
 
     public String getLeasingofficeName() {
         return leasingofficeName;
     }
+    // Default constructor
+    public Leasingoffice() {
+    }
 
-    public void setLeasingofficeName(String leasingofficeName) {
+    // Constructor with parameters
+    public Leasingoffice(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }
 
-    public Manufacturer getManufacturer() {
-        return manufacturer;
+    // Getters and setters
+
+    public List<Salesstaff> getSalesstaffList() {
+        return salesstaffList;
     }
 
-    public void setManufacturer(Manufacturer manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setSalesstaffList(List<Salesstaff> salesstaffList) {
+        this.salesstaffList = salesstaffList;
+    }
+    
+    public void addSalesstaff(Salesstaff salesstaff) {
+        salesstaff.setLeasingoffice(this);
     }
 
+    // Getters and setters
+
+    // hashCode, equals, and toString methods
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        return hash;
+        return Objects.hash(id, leasingofficeName);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Leasingoffice other = (Leasingoffice) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Leasingoffice that = (Leasingoffice) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(leasingofficeName, that.leasingofficeName);
     }
 
     @Override
     public String toString() {
-        return "Leasingoffice{" + "id=" + id + ", leasingofficeName=" + leasingofficeName + '}';
+        return "Leasingoffice{" +
+                "id=" + id +
+                ", leasingofficeName='" + leasingofficeName + '\'' +
+                '}';
     }
-
 }

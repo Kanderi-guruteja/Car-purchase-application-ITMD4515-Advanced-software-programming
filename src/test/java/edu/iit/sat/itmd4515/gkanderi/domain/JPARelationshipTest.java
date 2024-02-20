@@ -31,7 +31,7 @@ public class JPARelationshipTest extends AbstractJPATest{
      * Testing the Many to Many Bi-Directional relationship
      */
     @Test
-    public void biDirectionalRelationshipTest(){
+    public void biDirectionalRelationshipTest1(){
         // Existing functionality
         Manufacturer m = new Manufacturer("Manufacturer@none.net", "Manufacturer Test", LocalDate.of(1980,2,10));
         Car c = new Car("Mercedes Benz", LocalDate.of(2023, 1, 17), CarType.Petrol);
@@ -68,4 +68,30 @@ public class JPARelationshipTest extends AbstractJPATest{
         assertNotNull(newManufacturerFromDB.getLeasingoffice());
         System.out.println("Leasing office from database: " + newManufacturerFromDB.getLeasingoffice());
         assertEquals("Chicago Car Leasing Office", newManufacturerFromDB.getLeasingoffice().getLeasingofficeName().trim());}
+    
+    public void biDirectionalRelationshipTest2(){
+        Leasingoffice leasingoffice = new Leasingoffice("Chicago Car Leasing office");
+        Salesstaff salesstaff = new Salesstaff("Priority salesstaff");
+        
+        // Bidirectional relationship setup
+        leasingoffice.getSalesstaffList().add(salesstaff);
+        salesstaff.setLeasingoffice(leasingoffice);
+        
+        tx.begin();
+        em.persist(leasingoffice);
+        em.persist(salesstaff);
+        tx.commit();
+        
+        // Fetch the leasing office from the database
+        Leasingoffice leasingofficeFromDB = em.find(Leasingoffice.class, leasingoffice.getId());
+        
+        // Print bidirectional relationship to the console
+        System.out.println("Navigating relationship from the owning side: " + leasingofficeFromDB.getSalesstaffList());
+        for (Salesstaff staff : leasingofficeFromDB.getSalesstaffList()) {
+            System.out.println("Navigating relationship from the inverse side: " + staff.getLeasingoffice());
+        }
+        
+        assertNotNull(leasingofficeFromDB.getSalesstaffList());
+        assertTrue(leasingofficeFromDB.getSalesstaffList().size() == 1);
+    }
 }
