@@ -27,9 +27,7 @@ public class JPARelationshipTest extends AbstractJPATest{
                 
     }
     
-    /**
-     * Testing the Many to Many Bi-Directional relationship
-     */
+   
     @Test
     public void biDirectionalRelationshipTest1(){
         // Existing functionality
