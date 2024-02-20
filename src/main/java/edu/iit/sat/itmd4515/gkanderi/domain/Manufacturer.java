@@ -8,16 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- *
- * @author 18722
- */
 @Entity
 public class Manufacturer {
 
@@ -36,7 +33,21 @@ public class Manufacturer {
     private LocalDate makeDate;
 
     @OneToMany(mappedBy = "manufacturer")
-    private List<Appointment> appts = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>();
+    
+      public void addCar(Car car) {
+        if (!this.cars.contains(car)) {
+            this.cars.add(car);
+            car.getManufacturer().add(this);
+        }
+    }
+
+    public void removeCar(Car car) {
+        if (this.cars.contains(car)) {
+            this.cars.remove(car);
+            car.getManufacturer().remove(this);
+        }
+    }
 
     @ManyToMany
     @JoinTable(name = "MANUFACTURER_CARS",
@@ -44,38 +55,18 @@ public class Manufacturer {
             inverseJoinColumns = @JoinColumn(name= "CAR_ID"))
     private List<Car> cars = new ArrayList<>();
     
-     // Default constructor
-    public Manufacturer() {
-        
-        }
-    public void addCar(Car c){
-        if(!this.cars.contains(c)){
-        this.cars.add(c);
-        }
-        if(!c.getManufacturer().contains(this)){
-        c.getManufacturer().add(this);
-        }
-        
-    }
+    @ManyToOne
+    @JoinColumn(name = "LEASINGOFFICE_ID")
+    private Leasingoffice leasingoffice;
     
-    public void removeCar(Car c){
-        if(this.cars.contains(c)){
-        this.cars.remove(c);
-        }
-        if(c.getManufacturer().contains(this)){
-        c.getManufacturer().remove(this);
-        }
-        
+    public Manufacturer() {
     }
 
-    // Updated parameterized constructor
     public Manufacturer(String email, String name, LocalDate makeDate) {
         this.email = email;
         this.name = name;
         this.makeDate = makeDate;
     }
-
-    // Getters and setters for all fields
 
     public Long getId() {
         return id;
@@ -109,22 +100,12 @@ public class Manufacturer {
         this.makeDate = makeDate;
     }
 
-    public List<Appointment> getAppts() {
-        return appts;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
-    public void setAppts(List<Appointment> appts) {
-        this.appts = appts;
-    }
-
-    public void addAppointment(Appointment appointment) {
-        this.appts.add(appointment);
-        appointment.setManufacturer(this);
-    }
-
-    public void removeAppointment(Appointment appointment) {
-        this.appts.remove(appointment);
-        appointment.setManufacturer(null);
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     public List<Car> getCars() {
@@ -135,18 +116,13 @@ public class Manufacturer {
         this.cars = cars;
     }
 
-    /**
-    public void addCar(Car car) {
-        this.cars.add(car);
-        car.getManufacturer().add(this);
+    public Leasingoffice getLeasingoffice() {
+        return leasingoffice;
     }
-    **/
-/**
-    public void removeCar(Car car) {
-        this.cars.remove(car);
-        car.getManufacturer().remove(this);
+
+    public void setLeasingoffice(Leasingoffice leasingoffice) {
+        this.leasingoffice = leasingoffice;
     }
-    **/
 
     @Override
     public int hashCode() {
@@ -178,5 +154,4 @@ public class Manufacturer {
         return "Manufacturer{" + "id=" + id + ", email=" + email + ", name=" + name + ", makeDate=" + makeDate + '}';
     }
 
-    
 }
