@@ -6,10 +6,10 @@ import jakarta.ws.rs.core.Response;
 
 /**
  *
- * @author 
+ * @author 18722
  */
-@Path("jakartaee10")
-public class JakartaEE10Resource {
+@Path("/carleasing")
+public class CarLeasingBaseResource {
     
     @GET
     public Response ping(){
@@ -17,4 +17,12 @@ public class JakartaEE10Resource {
                 .ok("ping Jakarta EE")
                 .build();
     }
+     @GET
+     @Path("/version")
+    public Response version(){
+        return Response
+                .ok("v1")
+                .build();
+    }
+    
 }

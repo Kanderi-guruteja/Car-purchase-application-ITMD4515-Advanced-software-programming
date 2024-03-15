@@ -8,10 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,14 +24,10 @@ import java.util.Objects;
  * @author 18722
  */
 @Entity
-@Table(name ="Car")
-public class Car {
+@Table(name="CAR")
+@NamedQuery(name ="Car.findAll", query ="select p from Car p")
+public class Car extends AbstractEntity{
 
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Car_ID")
-    private Long id;
-    
     @NotBlank
     @Column(name = "Car_NAME", nullable = false, unique = true)
     private String name;
@@ -44,43 +38,36 @@ public class Car {
       
     @Column(name = "Car_Type")
     
-    
-    
  @NotNull
 @Enumerated(EnumType.STRING)
 private CarType type;
     
-   
 @ManyToMany(mappedBy = "cars")    
 private List<Manufacturer> manufacturers = new ArrayList<>();
 
-    /**
-     * Get the value of manufacturer
-     *
-     * @return the value of manufacturer
-     */
+@ManyToMany(mappedBy = "cars")    
+    private List<Appointment> appointments = new ArrayList<>();
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
     public List<Manufacturer> getManufacturer() {
         return manufacturers;
     }
-
-    /**
-     * Set the value of manufacturer
-     *
-     * @param manufacturer new value of manufacturer
-     */
     public void setManufacturer(List<Manufacturer> manufacturer) {
         this.manufacturers = manufacturer;
     }
-
-
-
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -92,7 +79,6 @@ private List<Manufacturer> manufacturers = new ArrayList<>();
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
         final Car other = (Car) obj;
         
          if( this.id == null || other.id == null){
@@ -100,53 +86,33 @@ private List<Manufacturer> manufacturers = new ArrayList<>();
          }
         return Objects.equals(this.id, other.id);
     }
-
     @Override
     public String toString() {
         return "Car{" + "id=" + id + ", name=" + name + ", buyDate=" + buyDate + ", type=" + type + '}';
     }
-
-    // Default constructor is required by JPA
     public Car() {
     }
-
     public Car(String name, LocalDate buyDate, CarType type) {
         this.name = name;
         this.buyDate = buyDate;
         this.type = type;
     }
-
-    // Getters and setters
-
     public CarType getType() {
         return type;
     }
-
     public void setType(CarType type) {
         this.type = type;
     }
-
     public LocalDate getBuyDate() {
         return buyDate;
     }
-
     public void setBuyDate(LocalDate buyDate) {
         this.buyDate = buyDate;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edu.iit.sat.itmd4515.gkanderi.domain;
 import edu.iit.sat.itmd4515.gkanderi.domain.Leasingoffice;
 
@@ -79,11 +83,9 @@ public class JPARelationshipTest extends AbstractJPATest{
         em.persist(leasingoffice);
         em.persist(salesstaff);
         tx.commit();
-        
-        // Fetch the leasing office from the database
+       
         Leasingoffice leasingofficeFromDB = em.find(Leasingoffice.class, leasingoffice.getId());
         
-        // Print bidirectional relationship to the console
         System.out.println("Navigating relationship from the owning side: " + leasingofficeFromDB.getSalesstaffList());
         for (Salesstaff staff : leasingofficeFromDB.getSalesstaffList()) {
             System.out.println("Navigating relationship from the inverse side: " + staff.getLeasingoffice());

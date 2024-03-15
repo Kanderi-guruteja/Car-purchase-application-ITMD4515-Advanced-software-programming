@@ -6,13 +6,15 @@ package edu.iit.sat.itmd4515.gkanderi.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -20,12 +22,10 @@ import java.util.Objects;
  * @author 18722
  */
 @Entity
-public class Appointment {
+@NamedQuery(name ="Appointment.findAll", query ="select a FROM Appointment a")
+public class Appointment extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "APPT_ID")
-    private Long Id;
+   
     @Column(name = "APPT_DATE")
     private LocalDate date;
     @Column(name = "APPT_TIME")
@@ -44,7 +44,14 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "SALESSTAFF_ID")
     private Salesstaff salesstaff;
-
+    
+    @ManyToMany
+    @JoinTable(
+    name = "CAR_APPOINTMENT",
+    joinColumns = @JoinColumn(name = "APPOINTMENT_ID"),
+    inverseJoinColumns = @JoinColumn(name = "CAR_ID")
+)
+private List<Car> cars = new ArrayList<>();
     /**
      * Get the value of salesstaff
      *
@@ -53,7 +60,6 @@ public class Appointment {
     public Salesstaff getSalesstaff() {
         return salesstaff;
     }
-
     /**
      * Set the value of salesstaff
      *
@@ -62,7 +68,6 @@ public class Appointment {
     public void setSalesstaff(Salesstaff salesstaff) {
         this.salesstaff = salesstaff;
     }
-
     /**
      * Get the value of car
      *
@@ -71,7 +76,6 @@ public class Appointment {
     public Car getCar() {
         return car;
     }
-
     /**
      * Set the value of car
      *
@@ -80,7 +84,6 @@ public class Appointment {
     public void setCar(Car car) {
         this.car = car;
     }
-
     /**
      * Get the value of manufacturer
      *
@@ -89,7 +92,6 @@ public class Appointment {
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
-
     /**
      * Set the value of manufacturer
      *
@@ -103,19 +105,40 @@ public class Appointment {
         this.date = date;
         this.time = time;
     }
-
     public Appointment() {
     }
-
+    public void  schedAppt (Manufacturer m, Car c, Salesstaff s){
+        this.manufacturer= m;
+        this.car= c;
+        this.salesstaff= s;
+        
+        if(!m.getAppointments().contains(this)){
+        m.getAppointments().add(this);
+        }
+        if(!c.getAppointments().contains(this)){
+        s.getAppointments().add(this);
+        }
+}
+    public void cancelappointment(){
+        if(this.manufacturer.getAppointments().contains(this)){
+        this.manufacturer.getAppointments().remove(this);
+}
+        if(this.salesstaff.getAppointments().contains(this)){
+        this.salesstaff.getAppointments().remove(this);
+        }
+        this.manufacturer=null;
+        this.car=null;
+        this.salesstaff=null;
+    }
     @Override
     public String toString() {
-        return "Appointment{" + "Id=" + Id + ", date=" + date + ", time=" + time + '}';
+        return "Appointment{" + "Id=" + id + ", date=" + date + ", time=" + time + '}';
+    
     }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 17 * hash + Objects.hashCode(this.Id);
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -132,12 +155,11 @@ public class Appointment {
         }
         final Appointment other = (Appointment) obj;
 
-        if (this.Id == null || other.Id == null) {
+        if (this.id == null || other.id == null) {
             return false;
         }
-        return Objects.equals(this.Id, other.Id);
+        return Objects.equals(this.id, other.id);
     }
-
     /**
      * Get the value of time
      *
@@ -146,7 +168,6 @@ public class Appointment {
     public LocalTime getTime() {
         return time;
     }
-
     /**
      * Set the value of time
      *
@@ -155,7 +176,6 @@ public class Appointment {
     public void setTime(LocalTime time) {
         this.time = time;
     }
-
     /**
      * Get the value of date
      *
@@ -164,7 +184,6 @@ public class Appointment {
     public LocalDate getDate() {
         return date;
     }
-
     /**
      * Set the value of date
      *
@@ -174,21 +193,5 @@ public class Appointment {
         this.date = date;
     }
 
-    /**
-     * Get the value of Id
-     *
-     * @return the value of Id
-     */
-    public Long getId() {
-        return Id;
-    }
-
-    /**
-     * Set the value of Id
-     *
-     * @param Id new value of Id
-     */
-    public void setId(Long Id) {
-        this.Id = Id;
-    }
+    
 }

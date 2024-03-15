@@ -2,55 +2,53 @@ package edu.iit.sat.itmd4515.gkanderi.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PersistenceContext;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * 
+ * @author 18722
+ */
 @Entity
-public class Leasingoffice {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "LEASINGOFFICE_ID")
-    private Long id;
+@XmlRootElement
+@NamedQuery(name = "Leasingoffice.findAll", query = "SELECT l FROM Leasingoffice l")
+public class Leasingoffice extends AbstractEntity{
     
-    public Long getId() {
-    return id;
-}
+    
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Column(name = "LEASINGOFFICE_NAME")
+    public void create(Leasingoffice leasingoffice) {
+        entityManager.persist(leasingoffice);
+    }
+    
+
+    @Column(name = "LEASINGOFFICENAME")
     private String leasingofficeName;
 
     @OneToOne(mappedBy = "leasingoffice")
     private Manufacturer manufacturer;
-    
-    
-    // New field for bi-directional relationship with Salesstaff
+
     @OneToOne(mappedBy = "leasingoffice")
     private Salesstaff salesstaff;
 
-    // New field for one-to-many relationship with Salesstaff
     @OneToMany(mappedBy = "leasingoffice")
     private List<Salesstaff> salesstaffList = new ArrayList<>();
 
     public String getLeasingofficeName() {
         return leasingofficeName;
     }
-    // Default constructor
     public Leasingoffice() {
     }
-
-    // Constructor with parameters
     public Leasingoffice(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }
-
-    // Getters and setters
 
     public List<Salesstaff> getSalesstaffList() {
         return salesstaffList;
@@ -64,9 +62,12 @@ public class Leasingoffice {
         salesstaff.setLeasingoffice(this);
     }
 
-    // Getters and setters
+    public void setLeasingofficeName(String leasingofficeName) {
+        this.leasingofficeName = leasingofficeName;
+    }
+  
 
-    // hashCode, equals, and toString methods
+
     @Override
     public int hashCode() {
         return Objects.hash(id, leasingofficeName);

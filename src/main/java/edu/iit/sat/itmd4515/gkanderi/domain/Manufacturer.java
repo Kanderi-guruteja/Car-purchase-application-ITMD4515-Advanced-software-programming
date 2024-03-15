@@ -2,32 +2,26 @@ package edu.iit.sat.itmd4515.gkanderi.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * 
+ * @author 18722
+ */
 @Entity
-public class Manufacturer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MANUFACTURER_ID")
-    private Long id;
+@NamedQuery(name ="Manufacturer.findAll", query ="select m FROM Manufacturer m")
+public class Manufacturer extends AbstractNamedEntity{
 
     @Column(name = "MANUFACTURER_EMAIL")
     private String email;
-
-    @Column(name = "MANUFACTURER_NAME")
-    private String name;
 
     @Column(name = "MANUFACTURER_MAKEDATE")
     private LocalDate makeDate;
@@ -67,29 +61,12 @@ public class Manufacturer {
         this.name = name;
         this.makeDate = makeDate;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDate getMakeDate() {
