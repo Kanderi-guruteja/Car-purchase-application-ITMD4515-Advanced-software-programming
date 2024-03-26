@@ -21,7 +21,7 @@ public class Lab4Demo {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         
-        Car c1 =new Car("bmw", LocalDate.of(2022, 12, 10),CarType.Petrol);
+        Car c1 =new Car("bmw", LocalDate.of(2022, 12, 10),CarType.PETROL);
         System.out.println("Example: Car.toString() Before transaction:"+c1.toString());
         
         tx.begin();

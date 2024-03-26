@@ -29,8 +29,8 @@ public class CarJPATest extends AbstractJPATest{
 
     @Test
     public void createTest() {
-        Car c2 = new Car("merc", LocalDate.of(2022, 12, 10), CarType.Petrol);
-        Car c3 = new Car("audi", LocalDate.of(2022, 12, 10), CarType.Diesel);
+        Car c2 = new Car("merc", LocalDate.of(2022, 12, 10), CarType.PETROL);
+        Car c3 = new Car("audi", LocalDate.of(2022, 12, 10), CarType.DIESEL);
 
         tx.begin();
         em.persist(c2);

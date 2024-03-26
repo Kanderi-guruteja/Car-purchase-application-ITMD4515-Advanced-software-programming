@@ -43,7 +43,7 @@ public class CarValidationTest {
 
     @Test
     public void validateCarName_Success() {
-        Car car = new Car("Audi", LocalDate.now(), CarType.Petrol);
+        Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(0, violations.size());
         System.out.println("Validation passed for Car name");
@@ -51,14 +51,14 @@ public class CarValidationTest {
 
     @Test
     public void validateCarName_Invalid_Blank() {
-        Car car = new Car("", LocalDate.now(), CarType.Petrol);
+        Car car = new Car("", LocalDate.now(), CarType.PETROL);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(1, violations.size());
     }
 
     @Test
     public void validateCarBuyDate_Success() {
-        Car car = new Car("Audi", LocalDate.now(), CarType.Petrol);
+        Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(0, violations.size());
         System.out.println("Validation passed for Car buy date");
@@ -66,14 +66,14 @@ public class CarValidationTest {
 
     @Test
     public void validateCarBuyDate_Invalid_FutureDate() {
-        Car car = new Car("Audi", LocalDate.now().plusDays(1), CarType.Petrol);
+        Car car = new Car("Audi", LocalDate.now().plusDays(1), CarType.PETROL);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(1, violations.size());
     }
 
     @Test
     public void validateCarType_Success() {
-        Car car = new Car("Audi", LocalDate.now(), CarType.Petrol);
+        Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
         Set<ConstraintViolation<Car>> violations = validator.validate(car);
         assertEquals(0, violations.size());
         System.out.println("Validation passed for Car type");

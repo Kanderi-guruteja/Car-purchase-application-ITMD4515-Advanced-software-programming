@@ -36,7 +36,7 @@ public class JPARelationshipTest extends AbstractJPATest{
     public void biDirectionalRelationshipTest1(){
         // Existing functionality
         Manufacturer m = new Manufacturer("Manufacturer@none.net", "Manufacturer Test", LocalDate.of(1980,2,10));
-        Car c = new Car("Mercedes Benz", LocalDate.of(2023, 1, 17), CarType.Petrol);
+        Car c = new Car("Mercedes Benz", LocalDate.of(2023, 1, 17), CarType.PETROL);
         m.addCar(c);
         
         tx.begin();

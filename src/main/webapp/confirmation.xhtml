@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Confirmation page</title>
+    </h:head>
+    <h:body>
+        <h1>Confirmation</h1>
+        
+        <h3>Car Details</h3>
+        <ul>
+            <li>Car ID: #{carController.car.id}</li>
+            <li>Car Name: #{carController.car.name}</li>
+            <li>Car Type: #{carController.car.type}</li>
+            <li>Modified Timestamp: #{carController.car.modifiedTimestamp}</li>
+            <li>Version: #{carController.car.version}</li>
+        </ul>
+        
+        <h3>Thank you for submitting!</h3>
+    </h:body>
+</html>

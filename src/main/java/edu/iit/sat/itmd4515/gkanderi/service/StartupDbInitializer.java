@@ -56,10 +56,10 @@ public class StartupDbInitializer {
         leasingofficeService.create(l1);
         leasingofficeService.create(l2);
 
-        Car c1 = new Car("Buick", LocalDate.of(2020, 10, 8), CarType.Petrol);
-        Car c2 = new Car("Malibu", LocalDate.of(2021, 10, 9), CarType.Electric);
-        Car c3 = new Car("Ferrari", LocalDate.of(2022, 10, 10), CarType.Hybrid);
-        Car c4 = new Car("Maruti", LocalDate.of(2023, 10, 11), CarType.Diesel);
+        Car c1 = new Car("Buick", LocalDate.of(2020, 10, 8), CarType.PETROL);
+        Car c2 = new Car("Malibu", LocalDate.of(2021, 10, 9), CarType.ELECTRIC);
+        Car c3 = new Car("Ferrari", LocalDate.of(2022, 10, 10), CarType.HYBRID);
+        Car c4 = new Car("Maruti", LocalDate.of(2023, 10, 11), CarType.DIESEL);
 
         carService.create(c1);
         carService.create(c2);

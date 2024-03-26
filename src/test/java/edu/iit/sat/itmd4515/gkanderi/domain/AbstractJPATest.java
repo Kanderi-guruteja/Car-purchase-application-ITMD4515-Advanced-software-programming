@@ -34,7 +34,7 @@ public class AbstractJPATest {
         em = emf.createEntityManager();
         tx = em.getTransaction();
 
-        Car c1 = new Car("bmw", LocalDate.of(2022, 12, 10), CarType.Petrol);
+        Car c1 = new Car("bmw", LocalDate.of(2022, 12, 10), CarType.PETROL);
 
         tx.begin();
         em.persist(c1);

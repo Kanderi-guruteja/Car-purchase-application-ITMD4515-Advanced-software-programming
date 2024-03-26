@@ -10,8 +10,24 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author 18722
  */
+@NotNull
 public enum CarType {
-    @NotNull Electric, @NotNull Petrol, @NotNull Diesel, @NotNull Hybrid
-}
-    
+    PETROL("BMW CAR"),
+    DIESEL("Bnez CAR"),
+    ELECTRIC("Tesla CAR"),
+    HYBRID("Toyota CAR");
 
+    private String label;
+
+    private CarType(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public CarType[] getAllCarTypesForForm() {
+        return CarType.values();
+    }
+}
