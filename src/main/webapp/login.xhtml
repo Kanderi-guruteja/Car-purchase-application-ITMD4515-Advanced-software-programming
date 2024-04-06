@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/publicTemplate.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="title">
+        Login Page
+    </ui:define>
+
+    <ui:define name="content">
+        Login , done!
+        
+         <h:form>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Car ID:" for="carId" />
+                    <h:inputText id="carId" value="#{carController.car.id}" required="true">
+                        <f:validateLength minimum="1" />
+                    </h:inputText>
+                    <h:message for="carId" errorStyle="color: red" infoStyle="color: green" />
+                </h:panelGroup>
+            </p>
+         </h:form>
+        
+        
+        
+    </ui:define>
+
+</ui:composition>

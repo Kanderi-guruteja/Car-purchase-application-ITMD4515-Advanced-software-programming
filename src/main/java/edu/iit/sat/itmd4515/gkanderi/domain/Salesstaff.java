@@ -5,18 +5,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import security.User;
 /**
  * 
  * @author 18722
  */
-@Entity
+
 @NamedQuery(name ="Salesstaff.findAll", query ="select s FROM Salesstaff s")
+@Entity
 public class Salesstaff {
 
     @Id
@@ -36,6 +39,30 @@ public class Salesstaff {
 
     @OneToMany(mappedBy = "salesstaff")
     private List<Appointment> appointments = new ArrayList<>();
+    
+    
+    @OneToOne
+    @JoinColumn(name ="USERNAME")
+    private security.User user;
+
+    /**
+     * Get the value of user
+     *
+     * @return the value of user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @param user new value of user
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     
      public List<Appointment> getAppointments() {
         return appointments;

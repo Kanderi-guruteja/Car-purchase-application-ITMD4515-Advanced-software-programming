@@ -11,7 +11,65 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>welcome.xhtml</welcome-file>
+        
     </welcome-file-list>
+    
+    
+    <security-constraint>
+        
+        <web-resource-collection>
+            <web-resource-name>
+                Admin App Content
+            </web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+             <url-pattern>/welcome.xhtml</url-pattern>
+           
+            
+        </web-resource-collection>
+            <auth-constraint>
+                <role-name>ADMIN_ROLE</role-name>
+            </auth-constraint>
+        
+    </security-constraint>
+    
+    
+    <security-constraint>
+        
+        <web-resource-collection>
+            <web-resource-name>
+                manufacturer App Content
+            </web-resource-name>
+            <url-pattern>/manufacturer/*</url-pattern> 
+            <url-pattern>/welcome.xhtml</url-pattern>
+           
+            
+        </web-resource-collection>
+            <auth-constraint>
+                <role-name>MANUFACTURER_ROLE</role-name>
+            </auth-constraint>
+        
+    </security-constraint>
+    
+    <security-constraint>
+        
+        <web-resource-collection>
+            <web-resource-name>
+                salesstaff App Content
+            </web-resource-name>
+            <url-pattern>/salesstaff/*</url-pattern>
+             <url-pattern>/welcome.xhtml</url-pattern>
+           
+            
+        </web-resource-collection>
+            <auth-constraint>
+                <role-name>SALESSTAFF_ROLE</role-name>
+            </auth-constraint>
+        
+    </security-constraint>
+    
+    
+    
+    
+    
 </web-app>

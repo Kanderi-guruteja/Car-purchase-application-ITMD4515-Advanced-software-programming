@@ -8,10 +8,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import security.User;
 /**
  * 
  * @author 18722
@@ -28,6 +30,30 @@ public class Manufacturer extends AbstractNamedEntity{
 
     @OneToMany(mappedBy = "manufacturer")
     private List<Appointment> appointments = new ArrayList<>();
+    
+    @OneToOne
+    @JoinColumn(name ="USERNAME")
+    private User user;
+     
+
+    /**
+     * Get the value of user
+     *
+     * @return the value of user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @param user new value of user
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     
       public void addCar(Car car) {
         if (!this.cars.contains(car)) {
