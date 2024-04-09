@@ -20,7 +20,6 @@ import java.util.logging.Logger;
  * 
  * @author 18722
  */
-//mylogincontrol
 @Named
 @RequestScoped
 public class LoginController {
@@ -76,9 +75,7 @@ public class LoginController {
         }
 
         return "/welcome.xhtml?faces-redirect=true";
-
     }
-
     public String doLogout() {
         LOG.info("LoginController.doLogout");
 
