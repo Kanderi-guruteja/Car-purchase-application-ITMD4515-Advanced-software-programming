@@ -10,30 +10,22 @@
     </ui:define>
 
     <ui:define name="content">
-        Please Fill the details to Login here!
+        <h2>Please Fill the Details to Login</h2>
         
-        <h:form>
+        <h:form class="mt-4">
+            <div class="form-group">
+                <h:outputLabel for="userName">User Name</h:outputLabel>
+                <h:inputText id="userName" value="#{loginController.user.userName}" class="form-control" />
+                <h:message for="userName" styleClass="text-danger" />
+            </div>
 
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel value="User Name" for="userName" />
-                    <h:inputText id="userName" value="#{loginController.user.userName}" />
-                    <h:message for="userName" errorStyle="color: red" infoStyle="color: green"/>
-                </h:panelGroup>
-            </p>
-
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel value="Password" for="password" />
-                    <h:inputSecret id="password" value="#{loginController.user.password}" />
-                    <h:message for="password" errorStyle="color: red" infoStyle="color: green"/>
-                </h:panelGroup>
-            </p>
+            <div class="form-group">
+                <h:outputLabel for="password">Password</h:outputLabel>
+                <h:inputSecret id="password" value="#{loginController.user.password}" class="form-control" />
+                <h:message for="password" styleClass="text-danger" />
+            </div>
             
-            <p>
-                <h:commandButton value="Login" action="#{loginController.doLogin()}" />
-            </p>
-            
+            <h:commandButton value="Login" action="#{loginController.doLogin()}" styleClass="btn btn-primary" />
         </h:form>
         
     </ui:define>

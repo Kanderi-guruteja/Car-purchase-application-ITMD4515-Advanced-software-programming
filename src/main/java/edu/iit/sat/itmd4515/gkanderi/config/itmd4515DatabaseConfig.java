@@ -1,9 +1,9 @@
+
+package edu.iit.sat.itmd4515.gkanderi.config;
 /**
  *
  * @author 18722
  */
-package edu.iit.sat.itmd4515.gkanderi.config;
-
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.enterprise.context.ApplicationScoped;
 

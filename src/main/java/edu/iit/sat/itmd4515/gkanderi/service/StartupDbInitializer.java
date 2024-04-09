@@ -86,7 +86,7 @@ public class StartupDbInitializer {
         userService.create(Manufacturer1);
         
         //user5
-        User Manufacturer2 =new User (",manufacturer2","manufacturer2");
+        User Manufacturer2 =new User ("manufacturer2","manufacturer2");
         Manufacturer2.addGroup(ManufacturerGroup);
         userService.create(Manufacturer2);
         

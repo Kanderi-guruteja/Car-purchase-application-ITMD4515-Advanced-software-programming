@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.iit.sat.itmd4515.gkanderi.service;
-
 import edu.iit.sat.itmd4515.gkanderi.domain.Leasingoffice;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
