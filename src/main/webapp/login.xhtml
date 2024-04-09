@@ -3,29 +3,38 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./WEB-INF/templates/publicTemplate.xhtml"
-                xmlns:h="jakarta.faces.html"
-                xmlns:f="jakarta.faces.core">
+                xmlns:h="jakarta.faces.html">
 
     <ui:define name="title">
-        Login Page
+        Car Purchase Login Page
     </ui:define>
 
     <ui:define name="content">
-        Login , done!
+        Please Fill the details to Login here!
         
-         <h:form>
+        <h:form>
+
             <p>
                 <h:panelGroup layout="block">
-                    <h:outputLabel value="Car ID:" for="carId" />
-                    <h:inputText id="carId" value="#{carController.car.id}" required="true">
-                        <f:validateLength minimum="1" />
-                    </h:inputText>
-                    <h:message for="carId" errorStyle="color: red" infoStyle="color: green" />
+                    <h:outputLabel value="User Name" for="userName" />
+                    <h:inputText id="userName" value="#{loginController.user.userName}" />
+                    <h:message for="userName" errorStyle="color: red" infoStyle="color: green"/>
                 </h:panelGroup>
             </p>
-         </h:form>
-        
-        
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Password" for="password" />
+                    <h:inputSecret id="password" value="#{loginController.user.password}" />
+                    <h:message for="password" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
+            
+            <p>
+                <h:commandButton value="Login" action="#{loginController.doLogin()}" />
+            </p>
+            
+        </h:form>
         
     </ui:define>
 

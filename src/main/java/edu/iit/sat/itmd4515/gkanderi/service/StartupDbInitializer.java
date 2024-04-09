@@ -1,19 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.iit.sat.itmd4515.gkanderi.service;
-
 import edu.iit.sat.itmd4515.gkanderi.domain.Appointment;
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.CarType;
 import edu.iit.sat.itmd4515.gkanderi.domain.Leasingoffice;
 import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
-import security.Group;
-import security.GroupService;
-import security.User;
-import security.UserService;
+import edu.iit.sat.itmd4515.gkanderi.security.Group;
+import edu.iit.sat.itmd4515.gkanderi.security.GroupService;
+import edu.iit.sat.itmd4515.gkanderi.security.User;
+import edu.iit.sat.itmd4515.gkanderi.security.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Singleton;
@@ -67,32 +62,35 @@ public class StartupDbInitializer {
         groupService.create(SalesstaffGroup);
         
         //user1
-        User Salesstaff1 = new User("Salesstaff1", "Salesstaff1");
+        User Salesstaff1 = new User("salesstaff1", "salesstaff1");
         Salesstaff1.addGroup(SalesstaffGroup);
         Salesstaff1.addGroup(AdminGroup);
         userService.create(Salesstaff1);
         
         
         //user2
-        User Salesstaff2 = new User("Salesstaff2", "Salesstaff2");
+        User Salesstaff2 = new User("salesstaff2", "salesstaff2");
         Salesstaff2.addGroup(AdminGroup);
         Salesstaff2.addGroup(ManufacturerGroup);
         userService.create(Salesstaff2);
         
         //user3
-        User Salesstaff3 = new User("Salesstaff3", "Salesstaff3");
+        User Salesstaff3 = new User("salesstaff3", "salesstaff3");
         Salesstaff3.addGroup(SalesstaffGroup);
         Salesstaff3.addGroup(AdminGroup);
         userService.create(Salesstaff3);
         
-        User Manufacturer1 =new User ("Manufacturer1","Manufacturer1");
+        //user4
+        User Manufacturer1 =new User ("manufacturer1","manufacturer1");
         Manufacturer1.addGroup(ManufacturerGroup);
         userService.create(Manufacturer1);
         
-        User Manufacturer2 =new User ("Manufacturer2","Manufacturer2");
+        //user5
+        User Manufacturer2 =new User (",manufacturer2","manufacturer2");
         Manufacturer2.addGroup(ManufacturerGroup);
         userService.create(Manufacturer2);
         
+        //user6
         User admin =new User ("admin","admin");
         admin.addGroup(AdminGroup);
         userService.create(admin);

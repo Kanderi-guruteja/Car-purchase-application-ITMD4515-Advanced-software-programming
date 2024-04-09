@@ -8,8 +8,8 @@
         <class>edu.iit.sat.itmd4515.gkanderi.domain.Appointment</class>
         <class>edu.iit.sat.itmd4515.gkanderi.domain.Leasingoffice</class>
         <class>edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer</class>
-        <class>edu.iit.sat.itmd4515.gkanderi.domain.User</class>
-        <class>edu.iit.sat.itmd4515.gkanderi.domain.Group</class>
+        <class>edu.iit.sat.itmd4515.gkanderi.security.User</class>
+        <class>edu.iit.sat.itmd4515.gkanderi.security.Group</class>
         <class>edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff</class>
  
     

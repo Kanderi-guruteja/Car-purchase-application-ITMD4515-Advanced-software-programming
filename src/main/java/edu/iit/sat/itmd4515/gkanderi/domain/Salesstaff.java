@@ -12,7 +12,7 @@ import jakarta.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import security.User;
+import edu.iit.sat.itmd4515.gkanderi.security.User;
 /**
  * 
  * @author 18722
@@ -29,6 +29,9 @@ public class Salesstaff {
 
     @Column(name = "SALES_STAFF")
     private String name;
+    
+    @OneToOne
+    private User user;
 
     @OneToOne
     private Manufacturer manufacturer;
@@ -41,9 +44,6 @@ public class Salesstaff {
     private List<Appointment> appointments = new ArrayList<>();
     
     
-    @OneToOne
-    @JoinColumn(name ="USERNAME")
-    private security.User user;
 
     /**
      * Get the value of user

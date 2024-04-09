@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import security.User;
+import edu.iit.sat.itmd4515.gkanderi.security.User;
 /**
  * 
  * @author 18722

@@ -25,8 +25,4 @@ import jakarta.security.enterprise.authentication.mechanism.http.LoginToContinue
 )
 public class AppSecurityConfig {
     
-    
-    
-    
-    
 }
