@@ -7,8 +7,6 @@ package edu.iit.sat.itmd4515.gkanderi.service;
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -16,30 +14,37 @@ import java.util.List;
  * @author 18722
  */
 @Stateless
-public class ManufacturerService {
-    @PersistenceContext(unitName = "itmd4515PU")
-    private EntityManager em;
+public class ManufacturerService extends AbstractService<Manufacturer> {
 
-    public void create(Manufacturer m) {
-        em.persist(m);
+    public ManufacturerService() {
+        super(Manufacturer.class);
     }
+    
+   public Manufacturer findByUsername(String username) {
+    List<Manufacturer> results = em.createNamedQuery("Manufacturer.findByUsername", Manufacturer.class)
+                                   .setParameter("uname", username)
+                                   .getResultList();
 
-    public Manufacturer read(Long id) {
-        return em.find(Manufacturer.class, id);
-    }
+    if (!results.isEmpty()) {
+        return results.get(0);
+    } else {
+        return null;    }
+}
 
-    public void update(Manufacturer m) {
-        em.merge(m);
-    }
 
-    public void delete(Long id) {
-        Manufacturer m = em.find(Manufacturer.class, id);
-        if (m != null) {
-            em.remove(m);
-        }
-    }
 
     public List<Manufacturer> findAll() {
-        return em.createNamedQuery("Manufacturer.findAll", Manufacturer.class).getResultList();
+        return super.findAll("Manufacturer.findAll");
+    }
+    
+    public void createCarForManufacturer(Manufacturer manufacturer, Car car) {
+        
+        em.persist(car);
+
+        Manufacturer manufacturerRef = em.getReference(Manufacturer.class, manufacturer.getId());
+        manufacturerRef.addCar(car);
+        em.merge(manufacturerRef);
     }
 }
+
+

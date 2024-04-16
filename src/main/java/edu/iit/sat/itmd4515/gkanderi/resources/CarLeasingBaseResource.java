@@ -10,19 +10,20 @@ import jakarta.ws.rs.core.Response;
  */
 @Path("/carleasing")
 public class CarLeasingBaseResource {
-    
+
     @GET
-    public Response ping(){
+    public Response ping() {
         return Response
                 .ok("ping Jakarta EE")
                 .build();
     }
-     @GET
-     @Path("/version")
-    public Response version(){
+
+    @GET
+    @Path("/version")
+    public Response version() {
         return Response
                 .ok("v1")
                 .build();
     }
-    
+
 }

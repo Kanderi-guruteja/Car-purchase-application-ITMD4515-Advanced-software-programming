@@ -18,12 +18,13 @@ public class AppointmentService extends AbstractService<Appointment> {
     public AppointmentService() {
         super(Appointment.class);
     }
-    
-     public void create(Appointment appointment) {
+
+    public void create(Appointment appointment) {
         super.create(appointment);
     }
-    public List <Appointment> findAll(){
+
+    public List<Appointment> findAll() {
         return super.findAll("Appointment.findAll");
-        
+
     }
 }

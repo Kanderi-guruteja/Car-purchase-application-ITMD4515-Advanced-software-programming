@@ -19,28 +19,31 @@ import java.time.LocalDateTime;
  */
 @MappedSuperclass
 public class AbstractEntity {
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //@Column(name = "ID")
     protected Long id;
-    
+
     @Version
     private Long version;
-    
+
     private LocalDateTime createdTimestamp;
 
     private LocalDateTime modifiedTimestamp;
 
     @PrePersist
-     public void initializeCreatedTimestamp(){
-         this.createdTimestamp=LocalDateTime.now();
-         
-     }
-     @PreUpdate
-     public void initializeModifiedTimestamp(){
-         this.modifiedTimestamp=LocalDateTime.now();
-         
-     }
+    public void initializeCreatedTimestamp() {
+        this.createdTimestamp = LocalDateTime.now();
+
+    }
+
+    @PreUpdate
+    public void initializeModifiedTimestamp() {
+        this.modifiedTimestamp = LocalDateTime.now();
+
+    }
+
     /**
      * Get the value of modifiedTimestamp
      *
@@ -76,7 +79,6 @@ public class AbstractEntity {
     public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
-
 
     /**
      * Get the value of version

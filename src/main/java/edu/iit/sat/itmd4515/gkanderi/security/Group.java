@@ -1,4 +1,5 @@
 package edu.iit.sat.itmd4515.gkanderi.security;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;

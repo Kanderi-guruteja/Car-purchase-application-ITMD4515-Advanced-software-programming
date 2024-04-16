@@ -11,23 +11,22 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
- * 
+ *
  * @author 18722
  */
 @Entity
 @XmlRootElement
 @NamedQuery(name = "Leasingoffice.findAll", query = "SELECT l FROM Leasingoffice l")
-public class Leasingoffice extends AbstractEntity{
-    
-    
+public class Leasingoffice extends AbstractEntity {
+
     @PersistenceContext
     private EntityManager entityManager;
 
     public void create(Leasingoffice leasingoffice) {
         entityManager.persist(leasingoffice);
     }
-    
 
     @Column(name = "LEASINGOFFICENAME")
     private String leasingofficeName;
@@ -44,8 +43,10 @@ public class Leasingoffice extends AbstractEntity{
     public String getLeasingofficeName() {
         return leasingofficeName;
     }
+
     public Leasingoffice() {
     }
+
     public Leasingoffice(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }
@@ -57,7 +58,7 @@ public class Leasingoffice extends AbstractEntity{
     public void setSalesstaffList(List<Salesstaff> salesstaffList) {
         this.salesstaffList = salesstaffList;
     }
-    
+
     public void addSalesstaff(Salesstaff salesstaff) {
         salesstaff.setLeasingoffice(this);
     }
@@ -65,8 +66,6 @@ public class Leasingoffice extends AbstractEntity{
     public void setLeasingofficeName(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }
-  
-
 
     @Override
     public int hashCode() {
@@ -75,18 +74,22 @@ public class Leasingoffice extends AbstractEntity{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Leasingoffice that = (Leasingoffice) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(leasingofficeName, that.leasingofficeName);
+        return Objects.equals(id, that.id)
+                && Objects.equals(leasingofficeName, that.leasingofficeName);
     }
 
     @Override
     public String toString() {
-        return "Leasingoffice{" +
-                "id=" + id +
-                ", leasingofficeName='" + leasingofficeName + '\'' +
-                '}';
+        return "Leasingoffice{"
+                + "id=" + id
+                + ", leasingofficeName='" + leasingofficeName + '\''
+                + '}';
     }
 }

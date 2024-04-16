@@ -4,14 +4,20 @@
  */
 package edu.iit.sat.itmd4515.gkanderi.service;
 
+import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ *
+ * @author 18722
+ */
 @Stateless
 public class SalesstaffService {
+
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager em;
 
@@ -37,7 +43,9 @@ public class SalesstaffService {
     public List<Salesstaff> findAll() {
         return em.createQuery("SELECT s FROM Salesstaff s", Salesstaff.class).getResultList();
     }
+
+    public Salesstaff findByUsername(String username) {
+        return em.createNamedQuery("Salesstaff.findByUsername", Salesstaff.class).setParameter("uname", username).getSingleResult();
+
+    }
 }
-
-
-

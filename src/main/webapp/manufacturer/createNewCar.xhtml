@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../WEB-INF/templates/authenticatedTemplate.xhtml"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Create a New Car
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <!-- Car Name -->
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Car Name" for="carName" />
+                    <h:inputText id="carName" value="#{manufacturerCreateCarController.car.name}" />
+                    <h:message for="carName" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
+
+            <!-- Car Buy Date -->
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Car Buy Date" for="carBuyDate"/>
+                    <h:inputText id="carBuyDate" value="#{manufacturerCreateCarController.car.buyDate}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                    <h:message for="carBuyDate" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
+
+            <!-- Car Type -->
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Car Type" for="carType"/>
+                    <h:selectOneMenu id="carType" value="#{manufacturerCreateCarController.car.type}">
+                        <f:selectItems var="carType" 
+                                       value="#{manufacturerCreateCarController.allCarTypesForForm}"
+                                       itemLabel="#{carType.label}"
+                                       itemValue="#{carType}" />
+                    </h:selectOneMenu>
+                    <h:message for="carType" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
+
+            <!-- Submit Button -->
+            <h:commandButton value="Create A New Car" action="#{manufacturerCreateCarController.saveCar()}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>

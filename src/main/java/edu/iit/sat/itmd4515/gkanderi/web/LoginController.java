@@ -1,4 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edu.iit.sat.itmd4515.gkanderi.web;
+
 import edu.iit.sat.itmd4515.gkanderi.security.User;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -16,8 +21,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- * 
+ *
  * @author 18722
  */
 @Named
@@ -31,7 +37,6 @@ public class LoginController {
 
     @Inject
     FacesContext facesContext;
-
     private User user;
 
     public LoginController() {
@@ -40,11 +45,25 @@ public class LoginController {
     @PostConstruct
     private void postContruct() {
         LOG.info("LoginController.postConstruct");
-       user = new User();
+        user = new User();
     }
+
     public String getAuthenticatedUser() {
         return securityContext.getCallerPrincipal().getName();
     }
+
+    public boolean isManufacturer() {
+        return securityContext.isCallerInRole("MANUFACTURER_ROLE");
+    }
+
+    public boolean isSalesstaff() {
+        return securityContext.isCallerInRole("SALESSTAFF_ROLE");
+    }
+
+    public boolean isAdmin() {
+        return securityContext.isCallerInRole("ADMIN_ROLE");
+    }
+
     public String doLogin() {
         LOG.info("LoginController.doLogin");
 
@@ -65,17 +84,19 @@ public class LoginController {
                 break;
             case SEND_FAILURE:
                 LOG.info("FAILURE!" + status.toString());
-                return "/error.xhtml";
+                return "/loginError.xhtml";
             case NOT_DONE:
                 LOG.info("NOT DONE!" + status.toString());
-                return "/error.xhtml";
+                return "/loginError.xhtml";
             case SEND_CONTINUE:
                 LOG.info(status.toString());
                 break;
         }
 
         return "/welcome.xhtml?faces-redirect=true";
+
     }
+
     public String doLogout() {
         LOG.info("LoginController.doLogout");
 
@@ -97,5 +118,4 @@ public class LoginController {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

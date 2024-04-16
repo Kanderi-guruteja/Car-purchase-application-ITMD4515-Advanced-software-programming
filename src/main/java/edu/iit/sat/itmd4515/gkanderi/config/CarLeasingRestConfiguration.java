@@ -8,10 +8,10 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 /**
- * 
+ *
  * @author 18722
  */
 @ApplicationPath("/api")
 public class CarLeasingRestConfiguration extends Application {
-    
+
 }

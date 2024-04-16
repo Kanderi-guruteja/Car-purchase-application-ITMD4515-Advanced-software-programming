@@ -18,9 +18,9 @@ import jakarta.security.enterprise.authentication.mechanism.http.LoginToContinue
 @ApplicationScoped
 @DeclareRoles({"ADMIN_ROLE","MANUFACTURER_ROLE","SALESSTAFF_ROLE"})
 @CustomFormAuthenticationMechanismDefinition(
-    loginToContinue = @LoginToContinue(
-    loginPage = "/login.xhtml",
-      errorPage ="/error.xhtml")
+   loginToContinue = @LoginToContinue(
+                loginPage = "/login.xhtml",
+                errorPage = "/loginError.xhtml")
 
 )
 public class AppSecurityConfig {

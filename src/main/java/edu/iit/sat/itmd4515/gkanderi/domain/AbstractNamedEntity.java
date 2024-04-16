@@ -3,17 +3,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.iit.sat.itmd4515.gkanderi.domain;
+
 import jakarta.persistence.MappedSuperclass;
+
 /**
  *
  * @author 18722
  */
 @MappedSuperclass
-public class AbstractNamedEntity extends AbstractEntity{
+public class AbstractNamedEntity extends AbstractEntity {
+
     protected String name;
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

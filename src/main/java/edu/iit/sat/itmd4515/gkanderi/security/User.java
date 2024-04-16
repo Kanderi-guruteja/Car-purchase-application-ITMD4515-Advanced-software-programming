@@ -1,4 +1,5 @@
 package edu.iit.sat.itmd4515.gkanderi.security;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
@@ -26,11 +27,11 @@ public class User {
     private String userName;
     @NotBlank(message = "Please enter a password")
     private String password;
-    
+
     @ManyToMany
     @JoinTable(name = "SEC_USER_GROUPS",
-            joinColumns = @JoinColumn(name="USERNAME"),
-            inverseJoinColumns = @JoinColumn(name="GROUPNAME"))
+            joinColumns = @JoinColumn(name = "USERNAME"),
+            inverseJoinColumns = @JoinColumn(name = "GROUPNAME"))
     private List<Group> groups = new ArrayList<>();
 
     public User(String userName, String password) {
@@ -40,18 +41,21 @@ public class User {
 
     public User() {
     }
-    public void addGroup(Group g){
+
+    public void addGroup(Group g) {
         this.groups.add(g);
         g.getUsers().add(this);
     }
-    
-    public void removeGroup(Group g){
+
+    public void removeGroup(Group g) {
         this.groups.remove(g);
         g.getUsers().remove(this);
     }
+
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }

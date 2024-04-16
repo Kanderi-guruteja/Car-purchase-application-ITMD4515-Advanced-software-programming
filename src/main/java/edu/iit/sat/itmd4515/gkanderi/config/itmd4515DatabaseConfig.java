@@ -1,5 +1,5 @@
-
 package edu.iit.sat.itmd4515.gkanderi.config;
+
 /**
  *
  * @author 18722
@@ -17,8 +17,8 @@ import jakarta.enterprise.context.ApplicationScoped;
         user = "itmd4515",
         password = "itmd4515",
         properties = {
-                "zeroDateTimeBehavior=CONVERT_TO_NULL",
-                "useSSL=false"
+            "zeroDateTimeBehavior=CONVERT_TO_NULL",
+            "useSSL=false"
         }
 )
 public class itmd4515DatabaseConfig {

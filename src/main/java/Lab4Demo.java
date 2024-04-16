@@ -10,28 +10,30 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import java.time.LocalDate;
+
 /**
  *
  * @author 18722
  */
 public class Lab4Demo {
-    public static void main (String ... args){
-    
+
+    public static void main(String... args) {
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("itmd4515testPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-        
-        Car c1 =new Car("bmw", LocalDate.of(2022, 12, 10),CarType.PETROL);
-        System.out.println("Example: Car.toString() Before transaction:"+c1.toString());
-        
+
+        Car c1 = new Car("bmw", LocalDate.of(2022, 12, 10), CarType.PETROL);
+        System.out.println("Example: Car.toString() Before transaction:" + c1.toString());
+
         tx.begin();
         em.persist(c1);
         tx.commit();
-        
-        System.out.println("Example: Car.toString() after transaction:"+c1.toString());
-        
+
+        System.out.println("Example: Car.toString() after transaction:" + c1.toString());
+
         em.close();
         emf.close();
     }
-    
+
 }

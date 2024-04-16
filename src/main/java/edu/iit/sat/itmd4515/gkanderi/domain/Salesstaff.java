@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import edu.iit.sat.itmd4515.gkanderi.security.User;
+
 /**
- * 
+ *
  * @author 18722
  */
-
-@NamedQuery(name ="Salesstaff.findAll", query ="select s FROM Salesstaff s")
+@NamedQuery(name = "Salesstaff.findAll", query = "select s FROM Salesstaff s")
 @Entity
 public class Salesstaff {
 
@@ -29,7 +29,7 @@ public class Salesstaff {
 
     @Column(name = "SALES_STAFF")
     private String name;
-    
+
     @OneToOne
     private User user;
 
@@ -42,8 +42,6 @@ public class Salesstaff {
 
     @OneToMany(mappedBy = "salesstaff")
     private List<Appointment> appointments = new ArrayList<>();
-    
-    
 
     /**
      * Get the value of user
@@ -63,8 +61,7 @@ public class Salesstaff {
         this.user = user;
     }
 
-    
-     public List<Appointment> getAppointments() {
+    public List<Appointment> getAppointments() {
         return appointments;
     }
 
@@ -75,7 +72,8 @@ public class Salesstaff {
     // Default constructor
     public Salesstaff() {
     }
-     public Long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -83,7 +81,7 @@ public class Salesstaff {
     public Salesstaff(String name) {
         this.name = name;
     }
-    
+
     public Leasingoffice getLeasingoffice() {
         return leasingoffice;
     }
@@ -93,9 +91,6 @@ public class Salesstaff {
         this.leasingoffice = leasingoffice;
     }
 
-    // Getters and setters
-
-    // hashCode, equals, and toString methods
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
@@ -103,20 +98,23 @@ public class Salesstaff {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Salesstaff that = (Salesstaff) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+        return Objects.equals(id, that.id)
+                && Objects.equals(name, that.name);
     }
 
     @Override
     public String toString() {
-        return "Salesstaff{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Salesstaff{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 
-   
 }

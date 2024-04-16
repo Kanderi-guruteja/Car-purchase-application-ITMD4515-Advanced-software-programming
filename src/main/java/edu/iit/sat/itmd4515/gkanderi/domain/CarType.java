@@ -12,10 +12,10 @@ import jakarta.validation.constraints.NotNull;
  */
 @NotNull
 public enum CarType {
-    PETROL("BMW CAR"),
-    DIESEL("Bnez CAR"),
-    ELECTRIC("Tesla CAR"),
-    HYBRID("Toyota CAR");
+    PETROL("Petrol"),
+    DIESEL("Diesel"),
+    ELECTRIC("Electric"),
+    HYBRID("Hybrid");
 
     private String label;
 

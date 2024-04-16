@@ -1,4 +1,5 @@
 package edu.iit.sat.itmd4515.gkanderi.service;
+
 import edu.iit.sat.itmd4515.gkanderi.domain.Appointment;
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.CarType;
@@ -16,8 +17,9 @@ import jakarta.ejb.Startup;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Logger;
+
 /**
- * 
+ *
  * @author 18722
  */
 @Startup
@@ -40,61 +42,61 @@ public class StartupDbInitializer {
 
     @EJB
     private AppointmentService appointmentService;
-    
-    @EJB UserService userService;
-    @EJB GroupService groupService;
-    
+
+    @EJB
+    UserService userService;
+    @EJB
+    GroupService groupService;
 
     public StartupDbInitializer() {
     }
 
     @PostConstruct
     private void postConstruct() {
-        
+
         LOG.info("StartupDbInitializer.PostConstruct");
-        
+
         Group SalesstaffGroup = new Group("SALESSTAFF_GROUP", "security realm salesstaff group");
         Group ManufacturerGroup = new Group("MANUFACTURER_GROUP", "security realm Manufacturer group");
         Group AdminGroup = new Group("ADMIN_GROUP", "security realm Admin group users");
-        
+
         groupService.create(AdminGroup);
         groupService.create(ManufacturerGroup);
         groupService.create(SalesstaffGroup);
-        
+
         //user1
         User Salesstaff1 = new User("salesstaff1", "salesstaff1");
         Salesstaff1.addGroup(SalesstaffGroup);
         Salesstaff1.addGroup(AdminGroup);
         userService.create(Salesstaff1);
-        
-        
+
         //user2
         User Salesstaff2 = new User("salesstaff2", "salesstaff2");
         Salesstaff2.addGroup(AdminGroup);
         Salesstaff2.addGroup(ManufacturerGroup);
         userService.create(Salesstaff2);
-        
+
         //user3
         User Salesstaff3 = new User("salesstaff3", "salesstaff3");
         Salesstaff3.addGroup(SalesstaffGroup);
         Salesstaff3.addGroup(AdminGroup);
         userService.create(Salesstaff3);
-        
+
         //user4
-        User Manufacturer1 =new User ("manufacturer1","manufacturer1");
+        User Manufacturer1 = new User("manufacturer1", "manufacturer1");
         Manufacturer1.addGroup(ManufacturerGroup);
         userService.create(Manufacturer1);
-        
+
         //user5
-        User Manufacturer2 =new User ("manufacturer2","manufacturer2");
+        User Manufacturer2 = new User("manufacturer2", "manufacturer2");
         Manufacturer2.addGroup(ManufacturerGroup);
         userService.create(Manufacturer2);
-        
+
         //user6
-        User admin =new User ("admin","admin");
+        User admin = new User("admin", "admin");
         admin.addGroup(AdminGroup);
         userService.create(admin);
-        
+
         Leasingoffice l1 = new Leasingoffice("Leasingoffice one");
         Leasingoffice l2 = new Leasingoffice("Leasingoffice two");
 
@@ -116,28 +118,28 @@ public class StartupDbInitializer {
         s1.setUser(Salesstaff1);
         Salesstaff s2 = new Salesstaff("Diesel vehicles salesstaff");
         s2.setLeasingoffice(l2);
-         s2.setUser(Salesstaff2);
+        s2.setUser(Salesstaff2);
         Salesstaff s3 = new Salesstaff("Hybrid vehicles salesstaff");
         s3.setLeasingoffice(l2);
-         s3.setUser(Salesstaff3);
+        s3.setUser(Salesstaff3);
         Salesstaff s4 = new Salesstaff("Electric vehicles salesstaff");
         s4.setLeasingoffice(l1);
-         s4.setUser(Salesstaff1);
+        s4.setUser(Salesstaff1);
 
         salesstaffService.create(s1);
         salesstaffService.create(s2);
         salesstaffService.create(s3);
         salesstaffService.create(s4);
 
-        Manufacturer m1 = new Manufacturer("maker@Buick.com", "Buick", LocalDate.of(2024, 10, 10));
+        Manufacturer m1 = new Manufacturer("maker@Buick.com", "Buick_Maker", LocalDate.of(2024, 10, 10));
         m1.addCar(c1);
         m1.addCar(c2);
         m1.setUser(Manufacturer1);
-        Manufacturer m2 = new Manufacturer("dielseheicles_salesstaff_too@Malibu.com", "Diesel_salestaff_manufacturer_record", LocalDate.of(2012, 8, 11));
+        Manufacturer m2 = new Manufacturer("dielseheicles_salesstaff_too@Malibu.com", "Diesel_car_Maker", LocalDate.of(2012, 8, 11));
         m2.addCar(c3);
         m2.addCar(c4);
         m2.setUser(Salesstaff2);
-        
+
         Manufacturer m3 = new Manufacturer("maker@ferrari.com", "Ferrari", LocalDate.of(2013, 5, 20));
         m3.addCar(c1);
         m3.addCar(c3);

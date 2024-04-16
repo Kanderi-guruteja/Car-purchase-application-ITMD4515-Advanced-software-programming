@@ -1,26 +1,21 @@
 package edu.iit.sat.itmd4515.gkanderi.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import edu.iit.sat.itmd4515.gkanderi.security.User;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import edu.iit.sat.itmd4515.gkanderi.security.User;
+
 /**
- * 
+ *
  * @author 18722
  */
+
 @Entity
-@NamedQuery(name ="Manufacturer.findAll", query ="select m FROM Manufacturer m")
-public class Manufacturer extends AbstractNamedEntity{
+@NamedQuery(name = "Manufacturer.findAll", query = "select m from Manufacturer m")
+@NamedQuery(name = "Manufacturer.findByUsername", query="select m from Manufacturer m where m.user.userName = :uname")
+public class Manufacturer extends AbstractNamedEntity {
 
     @Column(name = "MANUFACTURER_EMAIL")
     private String email;
@@ -30,55 +25,21 @@ public class Manufacturer extends AbstractNamedEntity{
 
     @OneToMany(mappedBy = "manufacturer")
     private List<Appointment> appointments = new ArrayList<>();
-    
+
     @OneToOne
-    @JoinColumn(name ="USERNAME")
+    @JoinColumn(name = "USERNAME")
     private User user;
-     
-
-    /**
-     * Get the value of user
-     *
-     * @return the value of user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * Set the value of user
-     *
-     * @param user new value of user
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    
-      public void addCar(Car car) {
-        if (!this.cars.contains(car)) {
-            this.cars.add(car);
-            car.getManufacturer().add(this);
-        }
-    }
-
-    public void removeCar(Car car) {
-        if (this.cars.contains(car)) {
-            this.cars.remove(car);
-            car.getManufacturer().remove(this);
-        }
-    }
 
     @ManyToMany
     @JoinTable(name = "MANUFACTURER_CARS",
             joinColumns = @JoinColumn(name = "MANUFACTURER_ID"),
-            inverseJoinColumns = @JoinColumn(name= "CAR_ID"))
+            inverseJoinColumns = @JoinColumn(name = "CAR_ID"))
     private List<Car> cars = new ArrayList<>();
-    
+
     @ManyToOne
     @JoinColumn(name = "LEASINGOFFICE_ID")
     private Leasingoffice leasingoffice;
-    
+
     public Manufacturer() {
     }
 
@@ -87,6 +48,7 @@ public class Manufacturer extends AbstractNamedEntity{
         this.name = name;
         this.makeDate = makeDate;
     }
+
     public String getEmail() {
         return email;
     }
@@ -127,6 +89,31 @@ public class Manufacturer extends AbstractNamedEntity{
         this.leasingoffice = leasingoffice;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void addCar(Car car) {
+        if (!this.cars.contains(car)) {
+            this.cars.add(car);
+            car.getManufacturer().add(this);    }
+    }
+
+    public void removeCar(Car car) {
+        if (this.cars.contains(car)) {
+            this.cars.remove(car);
+            car.getManufacturer().remove(this);  }
+    }
+
+    @Override
+    public String toString() {
+        return "Manufacturer{" + "id=" + id + ", email=" + email + ", name=" + name + ", makeDate=" + makeDate + '}';
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -151,10 +138,4 @@ public class Manufacturer extends AbstractNamedEntity{
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Manufacturer{" + "id=" + id + ", email=" + email + ", name=" + name + ", makeDate=" + makeDate + '}';
-    }
-
 }

@@ -22,21 +22,18 @@ import java.util.Objects;
  * @author 18722
  */
 @Entity
-@NamedQuery(name ="Appointment.findAll", query ="select a FROM Appointment a")
-public class Appointment extends AbstractEntity{
+@NamedQuery(name = "Appointment.findAll", query = "select a FROM Appointment a")
+public class Appointment extends AbstractEntity {
 
-   
     @Column(name = "APPT_DATE")
     private LocalDate date;
     @Column(name = "APPT_TIME")
     private LocalTime time;
 
-    
     @ManyToOne
     @JoinColumn(name = "MANUFACTURER_ID")
     private Manufacturer manufacturer;
 
-   
     @ManyToOne
     @JoinColumn(name = "CAR_ID")
     private Car car;
@@ -44,14 +41,15 @@ public class Appointment extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "SALESSTAFF_ID")
     private Salesstaff salesstaff;
-    
+
     @ManyToMany
     @JoinTable(
-    name = "CAR_APPOINTMENT",
-    joinColumns = @JoinColumn(name = "APPOINTMENT_ID"),
-    inverseJoinColumns = @JoinColumn(name = "CAR_ID")
-)
-private List<Car> cars = new ArrayList<>();
+            name = "CAR_APPOINTMENT",
+            joinColumns = @JoinColumn(name = "APPOINTMENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CAR_ID")
+    )
+    private List<Car> cars = new ArrayList<>();
+
     /**
      * Get the value of salesstaff
      *
@@ -60,6 +58,7 @@ private List<Car> cars = new ArrayList<>();
     public Salesstaff getSalesstaff() {
         return salesstaff;
     }
+
     /**
      * Set the value of salesstaff
      *
@@ -68,6 +67,7 @@ private List<Car> cars = new ArrayList<>();
     public void setSalesstaff(Salesstaff salesstaff) {
         this.salesstaff = salesstaff;
     }
+
     /**
      * Get the value of car
      *
@@ -76,6 +76,7 @@ private List<Car> cars = new ArrayList<>();
     public Car getCar() {
         return car;
     }
+
     /**
      * Set the value of car
      *
@@ -84,6 +85,7 @@ private List<Car> cars = new ArrayList<>();
     public void setCar(Car car) {
         this.car = car;
     }
+
     /**
      * Get the value of manufacturer
      *
@@ -92,6 +94,7 @@ private List<Car> cars = new ArrayList<>();
     public Manufacturer getManufacturer() {
         return manufacturer;
     }
+
     /**
      * Set the value of manufacturer
      *
@@ -105,36 +108,41 @@ private List<Car> cars = new ArrayList<>();
         this.date = date;
         this.time = time;
     }
+
     public Appointment() {
     }
-    public void  schedAppt (Manufacturer m, Car c, Salesstaff s){
-        this.manufacturer= m;
-        this.car= c;
-        this.salesstaff= s;
-        
-        if(!m.getAppointments().contains(this)){
-        m.getAppointments().add(this);
+
+    public void schedAppt(Manufacturer m, Car c, Salesstaff s) {
+        this.manufacturer = m;
+        this.car = c;
+        this.salesstaff = s;
+
+        if (!m.getAppointments().contains(this)) {
+            m.getAppointments().add(this);
         }
-        if(!c.getAppointments().contains(this)){
-        s.getAppointments().add(this);
+        if (!c.getAppointments().contains(this)) {
+            s.getAppointments().add(this);
         }
-}
-    public void cancelappointment(){
-        if(this.manufacturer.getAppointments().contains(this)){
-        this.manufacturer.getAppointments().remove(this);
-}
-        if(this.salesstaff.getAppointments().contains(this)){
-        this.salesstaff.getAppointments().remove(this);
-        }
-        this.manufacturer=null;
-        this.car=null;
-        this.salesstaff=null;
     }
+
+    public void cancelappointment() {
+        if (this.manufacturer.getAppointments().contains(this)) {
+            this.manufacturer.getAppointments().remove(this);
+        }
+        if (this.salesstaff.getAppointments().contains(this)) {
+            this.salesstaff.getAppointments().remove(this);
+        }
+        this.manufacturer = null;
+        this.car = null;
+        this.salesstaff = null;
+    }
+
     @Override
     public String toString() {
         return "Appointment{" + "Id=" + id + ", date=" + date + ", time=" + time + '}';
-    
+
     }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -160,6 +168,7 @@ private List<Car> cars = new ArrayList<>();
         }
         return Objects.equals(this.id, other.id);
     }
+
     /**
      * Get the value of time
      *
@@ -168,6 +177,7 @@ private List<Car> cars = new ArrayList<>();
     public LocalTime getTime() {
         return time;
     }
+
     /**
      * Set the value of time
      *
@@ -176,6 +186,7 @@ private List<Car> cars = new ArrayList<>();
     public void setTime(LocalTime time) {
         this.time = time;
     }
+
     /**
      * Get the value of date
      *
@@ -184,6 +195,7 @@ private List<Car> cars = new ArrayList<>();
     public LocalDate getDate() {
         return date;
     }
+
     /**
      * Set the value of date
      *
@@ -193,5 +205,4 @@ private List<Car> cars = new ArrayList<>();
         this.date = date;
     }
 
-    
 }

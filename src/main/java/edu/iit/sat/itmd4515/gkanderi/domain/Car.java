@@ -24,28 +24,28 @@ import java.util.Objects;
  * @author 18722
  */
 @Entity
-@Table(name="CAR")
-@NamedQuery(name ="Car.findAll", query ="select p from Car p")
-public class Car extends AbstractEntity{
+@Table(name = "CAR")
+@NamedQuery(name = "Car.findAll", query = "select p from Car p")
+public class Car extends AbstractEntity {
 
     @NotBlank
     @Column(name = "Car_NAME", nullable = false, unique = true)
     private String name;
-    
+
     @PastOrPresent
     @Column(name = "Car_BUYDAY")
     private LocalDate buyDate;
-      
-    @Column(name = "Car_Type")
-    
- @NotNull
-@Enumerated(EnumType.STRING)
-private CarType type;
-    
-@ManyToMany(mappedBy = "cars")    
-private List<Manufacturer> manufacturers = new ArrayList<>();
 
-@ManyToMany(mappedBy = "cars")    
+    @Column(name = "Car_Type")
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private CarType type;
+
+    @ManyToMany(mappedBy = "cars")
+    private List<Manufacturer> manufacturers = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "cars")
     private List<Appointment> appointments = new ArrayList<>();
 
     public List<Appointment> getAppointments() {
@@ -59,15 +59,18 @@ private List<Manufacturer> manufacturers = new ArrayList<>();
     public List<Manufacturer> getManufacturer() {
         return manufacturers;
     }
+
     public void setManufacturer(List<Manufacturer> manufacturer) {
         this.manufacturers = manufacturer;
     }
+
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -80,38 +83,47 @@ private List<Manufacturer> manufacturers = new ArrayList<>();
             return false;
         }
         final Car other = (Car) obj;
-        
-         if( this.id == null || other.id == null){
-             return false;
-         }
+
+        if (this.id == null || other.id == null) {
+            return false;
+        }
         return Objects.equals(this.id, other.id);
     }
+
     @Override
     public String toString() {
         return "Car{" + "id=" + id + ", name=" + name + ", buyDate=" + buyDate + ", type=" + type + '}';
     }
+
     public Car() {
     }
+
     public Car(String name, LocalDate buyDate, CarType type) {
         this.name = name;
         this.buyDate = buyDate;
         this.type = type;
     }
+
     public CarType getType() {
         return type;
     }
+
     public void setType(CarType type) {
         this.type = type;
     }
+
     public LocalDate getBuyDate() {
         return buyDate;
     }
+
     public void setBuyDate(LocalDate buyDate) {
         this.buyDate = buyDate;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
