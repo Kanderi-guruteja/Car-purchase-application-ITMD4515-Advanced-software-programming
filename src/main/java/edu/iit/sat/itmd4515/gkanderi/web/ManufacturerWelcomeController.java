@@ -5,6 +5,7 @@
 package edu.iit.sat.itmd4515.gkanderi.web;
 
 import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
+import edu.iit.sat.itmd4515.gkanderi.service.CarService;
 import edu.iit.sat.itmd4515.gkanderi.service.ManufacturerService;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
@@ -23,7 +24,8 @@ import java.util.logging.Logger;
 public class ManufacturerWelcomeController {
 
     private static final Logger LOG = Logger.getLogger(ManufacturerWelcomeController.class.getName());
-
+    @Inject
+    private CarService carService;
     @EJB ManufacturerService ManufacturerService;
     @Inject LoginController loginController;
     private Manufacturer Manufacturer;

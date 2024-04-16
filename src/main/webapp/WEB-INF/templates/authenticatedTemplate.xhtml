@@ -17,71 +17,75 @@
     </h:head>
 
     <h:body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
 
-            <!-- Brand and toggle button for mobile -->
-            <h:link class="navbar-brand" outcome="/welcome.xhtml" value="Car Purchase Application"/>
+                <!-- Brand and toggle button for mobile -->
+                <h:link class="navbar-brand" outcome="/welcome.xhtml" value="Car Purchase Application"/>
 
-            <!-- Toggle button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Navigation links -->
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <h:link styleClass="#{fn:startsWith(view.viewId, '/welcome') ? 'nav-link active' : 'nav-link'}"
-                                outcome="/welcome.xhtml" value="Home"/>
-                    </li>
-
-                    <!-- Display Manufacturer link if user is in MANUFACTURER_ROLE -->
-                    <ui:fragment rendered="#{loginController.isManufacturer()}">
+                <!-- Navigation links -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <h:link styleClass="#{fn:startsWith(view.viewId, '/manufacturer') ? 'nav-link active' : 'nav-link'}"
-                                    outcome="/manufacturer/welcome.xhtml" value="Manufacturer"/>
+                            <h:link styleClass="#{fn:startsWith(view.viewId, '/welcome') ? 'nav-link active' : 'nav-link'}"
+                                    outcome="/welcome.xhtml" value="Home"/>
                         </li>
-                    </ui:fragment>
 
-                    <!-- Display Salesstaff link if user is in SALESSTAFF_ROLE -->
-                    <ui:fragment rendered="#{loginController.isSalesstaff()}">
-                        <li class="nav-item">
-                            <h:link styleClass="#{fn:startsWith(view.viewId, '/salesstaff') ? 'nav-link active' : 'nav-link'}"
-                                    outcome="/salesstaff/welcome.xhtml" value="Salesstaff"/>
-                        </li>
-                    </ui:fragment>
+                        <!-- Display Manufacturer link if user is in MANUFACTURER_ROLE -->
+                        <ui:fragment rendered="#{loginController.isManufacturer()}">
+                            <li class="nav-item">
+                                <h:link styleClass="#{fn:startsWith(view.viewId, '/manufacturer') ? 'nav-link active' : 'nav-link'}"
+                                        outcome="/manufacturer/welcome.xhtml" value="Manufacturer"/>
+                            </li>
+                        </ui:fragment>
 
-                    <!-- Display Admin link if user is in ADMIN_ROLE -->
-                    <ui:fragment rendered="#{loginController.isAdmin()}">
-                        <li class="nav-item">
-                            <h:link styleClass="#{fn:startsWith(view.viewId, '/admin') ? 'nav-link active' : 'nav-link'}"
-                                    outcome="/admin/welcome.xhtml" value="Admin"/>
-                        </li>
-                    </ui:fragment>
-                </ul>
+                        <!-- Display Sales_staff and Manufacturer links if user is in SALESSTAFF_ROLE -->
+                        <ui:fragment rendered="#{loginController.isSalesstaff()}">
+                            <li class="nav-item">
+                                <h:link styleClass="#{fn:startsWith(view.viewId, '/salesstaff') ? 'nav-link active' : 'nav-link'}"
+                                        outcome="/salesstaff/welcome.xhtml" value="Salesstaff"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:link styleClass="#{fn:startsWith(view.viewId, '/manufacturer') ? 'nav-link active' : 'nav-link'}"
+                                        outcome="/manufacturer/welcome.xhtml" value="Manufacturer"/>
+                            </li>
+                        </ui:fragment>
 
-                <!-- Logout button -->
-                <h:form class="d-flex">
-                    <h:commandButton styleClass="btn btn-outline-success"
-                                     action="#{loginController.doLogout()}"
-                                     value="Logout"/>
-                </h:form>
+                        <!-- Display Admin link if user is in ADMIN_ROLE -->
+                        <ui:fragment rendered="#{loginController.isAdmin()}">
+                            <li class="nav-item">
+                                <h:link styleClass="#{fn:startsWith(view.viewId, '/admin') ? 'nav-link active' : 'nav-link'}"
+                                        outcome="/admin/welcome.xhtml" value="Admin"/>
+                            </li>
+                        </ui:fragment>
+                    </ul>
+
+                    <!-- Logout button -->
+                    <h:form class="d-flex">
+                        <h:commandButton styleClass="btn btn-outline-success"
+                                         action="#{loginController.doLogout()}"
+                                         value="Logout"/>
+                    </h:form>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="container">
-        <div class="bg-body-tertiary p-5 rounded">
-            <h1><ui:insert name="title">DEFAULT TITLE</ui:insert></h1>
-            <ui:insert name="content">DEFAULT CONTENT BLOCK</ui:insert>
-        </div>
-    </main>
+        <main class="container">
+            <div class="bg-body-tertiary p-5 rounded">
+                <h1><ui:insert name="title">DEFAULT TITLE</ui:insert></h1>
+                <ui:insert name="content">DEFAULT CONTENT BLOCK</ui:insert>
+            </div>
+        </main>
 
-    <!-- Include Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-</h:body>
+        <!-- Include Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    </h:body>
 </html>

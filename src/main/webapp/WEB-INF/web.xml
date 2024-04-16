@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+    https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
 
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 
     <welcome-file-list>
@@ -24,11 +26,12 @@
         <location>/errors/error.xhtml</location>
     </error-page>
 
+    <!-- Security Constraints -->
     <security-constraint>
-        <web-resource-collection> 
+        <web-resource-collection>
             <web-resource-name>Admin App Content</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
-            <url-pattern>/welcome.xhtml</url-pattern>
+            <url-pattern>/admin/welcome.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN_ROLE</role-name>
@@ -36,25 +39,44 @@
     </security-constraint>
 
     <security-constraint>
-        <web-resource-collection> 
-            <web-resource-name>manufacturer App Content</web-resource-name>
+        <web-resource-collection>
+            <web-resource-name>Manufacturer App Content</web-resource-name>
             <url-pattern>/manufacturer/*</url-pattern>
-            <url-pattern>/welcome.xhtml</url-pattern>
+            <url-pattern>/manufacturer/welcome.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>MANUFACTURER_ROLE</role-name>
         </auth-constraint>
     </security-constraint>
-    
+
     <security-constraint>
-        <web-resource-collection> 
+        <web-resource-collection>
             <web-resource-name>Salesstaff App Content</web-resource-name>
             <url-pattern>/salesstaff/*</url-pattern>
-            <url-pattern>/welcome.xhtml</url-pattern>
+            <url-pattern>/salesstaff/welcome.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>SALESSTAFF_ROLE</role-name>
         </auth-constraint>
     </security-constraint>
-            
+
+    <!-- Error Pages -->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errors/authz.xhtml</location>
+    </error-page>
+
+    <!-- Security Roles -->
+    <security-role>
+        <role-name>ADMIN_ROLE</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>MANUFACTURER_ROLE</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>SALESSTAFF_ROLE</role-name>
+    </security-role>
+
 </web-app>
