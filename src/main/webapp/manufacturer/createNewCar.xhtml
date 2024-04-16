@@ -22,11 +22,12 @@
                 </h:panelGroup>
             </p>
 
-            <!-- Car Buy Date -->
+           
+           <!-- Car Buy Date -->
             <p>
                 <h:panelGroup layout="block">
                     <h:outputLabel value="Car Buy Date" for="carBuyDate"/>
-                    <h:inputText id="carBuyDate" value="#{manufacturerCreateCarController.car.buyDate}">
+                    <h:inputText p:type="date" id="petBirthDate" value="#{manufacturerCreateCarController.car.buyDate}">
                         <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
                     </h:inputText>
                     <h:message for="carBuyDate" errorStyle="color: red" infoStyle="color: green"/>
