@@ -52,3 +52,4 @@ public class ManufacturerWelcomeController {
         this.Manufacturer = Manufacturer;
     }
 }
+

@@ -69,7 +69,7 @@ public class ManufacturerCarController {
    public String displayViewCarPage(Car c) {
         // Step 1 - accept the click and set the model
         this.car = c;
-        LOG.info("Inside displayViewPetPage with model " + c.toString());
+        LOG.info("Inside displayViewCarPage with model " + c.toString());
 
         // Step 2 - navigate the user to the intended or appropriate JSF view
         return "/manufacturer/viewCar.xhtml";
@@ -78,7 +78,7 @@ public class ManufacturerCarController {
     public String displayEditCarPage(Car c) {
         // Step 1 - accept the click and set the model
         this.car = c;
-        LOG.info("Inside displayEditPetPage with model " + c.toString());
+        LOG.info("Inside displayEditCarPage with model " + c.toString());
 
         // Step 2 - navigate the user to the intended or appropriate JSF view
         return "/manufacturer/editCar.xhtml";

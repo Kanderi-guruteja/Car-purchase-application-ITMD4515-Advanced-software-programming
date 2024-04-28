@@ -18,24 +18,42 @@ import java.util.List;
 @Stateless
 public class CarService extends AbstractService<Car> {
 
-     public CarService() {
+    /**
+     *
+     */
+    public CarService() {
         super(Car.class);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Car> findAll() {
         return super.findAll("Car.findAll");
     }
 
+    /**
+     *
+     * @param car
+     */
     public void createCar(Car car) {
         super.create(car);
     }
 
-   
+    /**
+     *
+     * @param Salesstaff
+     */
     public void createSalesstaff(Salesstaff Salesstaff) {
         
     }
     
-      public void editCarForExistingManufacturer(Car c){
+    /**
+     *
+     * @param c
+     */
+    public void editCarForExistingManufacturer(Car c){
         Car managedRef=em.getReference(Car.class, c.getId());
         
         managedRef.setName(c.getName());
