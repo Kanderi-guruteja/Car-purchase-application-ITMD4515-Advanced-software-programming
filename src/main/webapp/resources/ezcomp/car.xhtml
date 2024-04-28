@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name ="operation" required="true" type="java.lang.String"/>
+        <cc:attribute name="car" type="edu.iit.sat.itmd4515.gkanderi.domain.Car" required="true" />
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p>
+            <h:panelGroup layout="block" rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
+                <h:outputLabel value="Car ID #{cc.attrs.car.id}" for="carId" />
+                <h:inputHidden id="carId" value="#{cc.attrs.car.id}" />
+                <h:message for="carId" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <!-- Car Name -->
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Car Name" for="carName" />
+                <h:inputText 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="carName" 
+                    value="#{cc.attrs.car.name}"/>
+                <h:message for="carName" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <!-- Car Buy Date adding the cal--> 
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Car Buy Date" for="carBuyDate"/>
+                <h:inputText 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    p:type="date" id="carBuyDate" value="#{cc.attrs.car.buyDate}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                </h:inputText>
+                <h:message for="carBuyDate" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <!-- Car Type -->
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Car Type" for="carType"/>
+                <h:selectOneMenu 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="carType" value="#{cc.attrs.car.type}">
+                    <f:selectItems var="carType" 
+                                   value="#{manufacturerCarController.allCarTypesForForm}"
+                                   itemLabel="#{carType.label}"
+                                   itemValue="#{carType}" />
+                </h:selectOneMenu>
+                <h:message for="carType" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
+            value="Create A New Car" 
+            action="#{cc.attrs.action}" />
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('edit')}"
+            value="Edit Car" 
+            action="#{cc.attrs.action}" />
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}"
+            value="Delete Car" 
+            action="#{cc.attrs.action}" />
+    </cc:implementation>
+</html>

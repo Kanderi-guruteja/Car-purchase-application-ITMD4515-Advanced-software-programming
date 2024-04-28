@@ -39,6 +39,11 @@ public class ManufacturerWelcomeController {
         Manufacturer = ManufacturerService.findByUsername(loginController.getAuthenticatedUser());
         LOG.info("OwnerWelcomeController.postConstruct: " + Manufacturer.toString());
     }
+    public void refreshManufacturerModel(){
+         Manufacturer = ManufacturerService.findByUsername(loginController.getAuthenticatedUser());
+       
+    }
+    
     public Manufacturer getManufacturer() {
         return Manufacturer;
     }

@@ -35,4 +35,14 @@ public class CarService extends AbstractService<Car> {
         
     }
     
+      public void editCarForExistingManufacturer(Car c){
+        Car managedRef=em.getReference(Car.class, c.getId());
+        
+        managedRef.setName(c.getName());
+        managedRef.setBuyDate(c.getBuyDate());
+        managedRef.setType(c.getType());
+        
+        em.merge(managedRef);
+    }
+    
 }

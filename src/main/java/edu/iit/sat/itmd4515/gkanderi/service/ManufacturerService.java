@@ -45,6 +45,10 @@ public class ManufacturerService extends AbstractService<Manufacturer> {
         manufacturerRef.addCar(car);
         em.merge(manufacturerRef);
     }
+    
+  
+    
+    
 }
 
 

@@ -52,7 +52,7 @@ public class StartupDbInitializer {
     }
 
     @PostConstruct
-    private void postConstruct() {
+    public void postConstruct() {
 
         LOG.info("StartupDbInitializer.PostConstruct");
 
@@ -135,19 +135,27 @@ public class StartupDbInitializer {
         m1.addCar(c1);
         m1.addCar(c2);
         m1.setUser(Manufacturer1);
+        
         Manufacturer m2 = new Manufacturer("dielseheicles_salesstaff_too@Malibu.com", "Diesel_car_Maker", LocalDate.of(2012, 8, 11));
         m2.addCar(c3);
         m2.addCar(c4);
         m2.setUser(Salesstaff2);
+        
+       
+        
+        
 
         Manufacturer m3 = new Manufacturer("maker@ferrari.com", "Ferrari", LocalDate.of(2013, 5, 20));
         m3.addCar(c1);
         m3.addCar(c3);
-        m3.setUser(Manufacturer1);
+        m3.setUser(Manufacturer2);
+        
+        
 
         manufacturerService.create(m1);
         manufacturerService.create(m2);
         manufacturerService.create(m3);
+        //manufacturerService.create(m2);
 
         Appointment a1 = new Appointment(LocalDate.of(2024, 5, 25), LocalTime.of(10, 30));
         a1.schedAppt(m1, c1, s1);
