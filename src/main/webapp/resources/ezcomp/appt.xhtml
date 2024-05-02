@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name ="operation" required="true" type="java.lang.String"/>
+        <cc:attribute name="appt" type="edu.iit.sat.itmd4515.gkanderi.domain.Appointment" required="true" />
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p>
+            <h:panelGroup layout="block" rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
+                <h:outputLabel value="Appt ID #{cc.attrs.appt.id}" for="apptId" />
+                <h:inputHidden id="apptId" value="#{cc.attrs.appt.id}" />
+                <h:message for="apptId" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <!-- Car Name -->
+       
+        <!-- Car Buy Date adding the cal--> 
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Appt Date" for="apptDate"/>
+                <h:inputText 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    p:type="date" id="apptDate" value="#{cc.attrs.appt.date}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                </h:inputText>
+                <h:message for="apptDate" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+        
+        
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Appt Time" for="apptTime"/>
+                <h:inputText 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    p:type="time" id="apptTime" value="#{cc.attrs.appt.time}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                </h:inputText>
+                <h:message for="apptTime" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+        
+          <p>
+            <h:panelGroup layout="block" >
+                <h:outputLabel value="Manufacturer ID #{cc.attrs.appt.manufacturer.id}(#{cc.attrs.appt.manufacturer.name})" for="manufacturerId" />
+                <h:inputHidden id="manufacturerId" value="#{cc.attrs.appt.manufacturer.id}" />
+                <h:message for="manufacturerId" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+        
+
+        <!-- Car Type -->
+        <p>
+            <h:panelGroup layout="block">
+                <h:outputLabel value="Car " for="car"/>
+                <h:selectOneMenu 
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="car" value="#{cc.attrs.appt.car}">
+                    <f:selectItems var="c" 
+                                   value="#{cc.attrs.appt.manufacturer.cars}"
+                                   itemLabel="#{c.label}"
+                                   itemValue="#{c}" />
+                </h:selectOneMenu>
+                <h:message for="car" errorStyle="color: red" infoStyle="color: green"/>
+            </h:panelGroup>
+        </p>
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
+            value="Schedule Appt" 
+            action="#{cc.attrs.action}" />
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('edit')}"
+            value="Modify Appt" 
+            action="#{cc.attrs.action}" />
+
+        <h:commandButton 
+            rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}"
+            value="Cancel Appt" 
+            action="#{cc.attrs.action}" />
+    </cc:implementation>
+</html>

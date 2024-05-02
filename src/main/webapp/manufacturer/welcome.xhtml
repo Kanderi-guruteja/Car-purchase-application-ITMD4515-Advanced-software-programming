@@ -56,10 +56,70 @@
                         <h:commandButton value="view" action="#{manufacturerCarController.displayViewCarPage(car)}"/>
                         <h:commandButton value="edit" action="#{manufacturerCarController.displayEditCarPage(car)}"/>
                         <h:commandButton value="Delete" action="#{manufacturerCarController.displayDeleteCarPage(car)}"/>
+                        <h:commandButton value="schedule appt" action="#{manufacturerApptController.displayScheduleApptPage(car)}"/>
                     </h:form>
                 </h:column>
 
             </h:dataTable>
+            
+            <h:dataTable 
+                styleClass="table table-striped table-hover"
+                value="#{manufacturerWelcomeController.manufacturer.appointments}" 
+                var="appt">
+                <h:column>
+                    <f:facet name="header">Appt ID</f:facet>
+                    <h:outputText value="#{appt.id}"/>
+                </h:column>
+
+               <h:column>
+                    <f:facet name="header">Appt Date</f:facet>
+                    <h:outputText value="#{appt.date}">
+                        <f:convertDateTime type="localDate" dateStyle="full"/>
+                    </h:outputText>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header">Appt Time</f:facet>
+                    <h:outputText value="#{appt.time}">
+                        <f:convertDateTime type="localTime" dateStyle="full"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Manufacturer Name</f:facet>
+                    <h:outputText value="#{appt.manufacturer.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header"># Car Name</f:facet>
+                    <h:outputText value="#{appt.car.name}"/>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header"># Car Type</f:facet>
+                    <h:outputText value="#{appt.car.type}"/>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header"># Sales_staff ID</f:facet>
+                    <h:outputText value="#{appt.salesstaff.id}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"># Sales_staff Leasing_office</f:facet>
+                    <h:outputText value="#{appt.salesstaff.leasingoffice.leasingofficeName}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:form>
+                        <h:commandButton value="view" action="#{manufacturerApptController.displayViewApptPage(appt)}"/>
+                        <h:commandButton value="edit" action="#{manufacturerApptController.displayEditApptPage(appt)}"/>
+                        <h:commandButton value="Delete" action="#{manufacturerApptController.displayDeleteApptPage(appt)}"/>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+            
         </ui:define>
     </ui:composition>
 </html>
