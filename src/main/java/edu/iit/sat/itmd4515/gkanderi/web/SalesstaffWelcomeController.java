@@ -19,65 +19,63 @@ import java.util.logging.Logger;
  *
  * @author 18722
  */
-
 @Named
 @RequestScoped
 public class SalesstaffWelcomeController {
 
     private static final Logger LOG = Logger.getLogger(SalesstaffWelcomeController.class.getName());
-   
+
     @Inject
     private CarService carService;
-    
-    @EJB SalesstaffService SalesstaffService;
-    
-    @Inject LoginController loginController;
+
+    @EJB
+    SalesstaffService SalesstaffService;
+
+    @Inject
+    LoginController loginController;
     private Salesstaff Salesstaff;
 
-    public SalesstaffWelcomeController()  {
+    public SalesstaffWelcomeController() {
     }
 
     @PostConstruct
-private void postConstruct() {
-    LOG.info("SalesstaffWelcomeController.postConstruct");
-    String username = loginController.getAuthenticatedUser();
-    if (username != null) {
-        List<Salesstaff> allSalesstaff = SalesstaffService.findAll();
-        for (Salesstaff staff : allSalesstaff) {
-            if (username.equals(staff.getUser().getUserName())) {
-                Salesstaff = staff;
-                LOG.info("SalesstaffWelcomeController.postConstruct: " + Salesstaff.toString());
-                return; // Found the sales staff, exit the loop
+    private void postConstruct() {
+        LOG.info("SalesstaffWelcomeController.postConstruct");
+        String username = loginController.getAuthenticatedUser();
+        if (username != null) {
+            List<Salesstaff> allSalesstaff = SalesstaffService.findAll();
+            for (Salesstaff staff : allSalesstaff) {
+                if (username.equals(staff.getUser().getUserName())) {
+                    Salesstaff = staff;
+                    LOG.info("SalesstaffWelcomeController.postConstruct: " + Salesstaff.toString());
+                    return; // Found the sales staff, exit the loop
+                }
             }
+            LOG.warning("Sales staff not found for username: " + username);
+        } else {
+            LOG.warning("Authenticated user not found!");
         }
-        LOG.warning("Sales staff not found for username: " + username);
-    } else {
-        LOG.warning("Authenticated user not found!");
     }
-}
 
-public void refreshSalesstaffModel() {
-    LOG.info("Refreshing Salesstaff model...");
-    String username = loginController.getAuthenticatedUser();
-    if (username != null) {
-        List<Salesstaff> allSalesstaff = SalesstaffService.findAll();
-        for (Salesstaff staff : allSalesstaff) {
-            if (username.equals(staff.getUser().getUserName())) {
-                Salesstaff = staff;
-                LOG.info("SalesstaffWelcomeController.refreshSalesstaffModel: " + Salesstaff.toString());
-                return; // Found the sales staff, exit the loop
+    public void refreshSalesstaffModel() {
+        LOG.info("Refreshing Salesstaff model...");
+        String username = loginController.getAuthenticatedUser();
+        if (username != null) {
+            List<Salesstaff> allSalesstaff = SalesstaffService.findAll();
+            for (Salesstaff staff : allSalesstaff) {
+                if (username.equals(staff.getUser().getUserName())) {
+                    Salesstaff = staff;
+                    LOG.info("SalesstaffWelcomeController.refreshSalesstaffModel: " + Salesstaff.toString());
+                    return; // Found the sales staff, exit the loop
+                }
             }
+            LOG.warning("Sales staff not found for username: " + username);
+        } else {
+            LOG.warning("Authenticated user not found!");
         }
-        LOG.warning("Sales staff not found for username: " + username);
-    } else {
-        LOG.warning("Authenticated user not found!");
     }
-}
 
-    
-    
-    
-    public Salesstaff getSalesstaff(){
+    public Salesstaff getSalesstaff() {
         return Salesstaff;
     }
 
@@ -85,4 +83,3 @@ public void refreshSalesstaffModel() {
         this.Salesstaff = Salesstaff;
     }
 }
-
