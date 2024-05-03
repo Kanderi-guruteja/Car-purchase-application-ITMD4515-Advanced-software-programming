@@ -4,9 +4,9 @@
  */
 package edu.iit.sat.itmd4515.gkanderi.service;
 
-import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
  *
  * @author 18722
  */
+@Named
 @Stateless
 public class SalesstaffService {
 

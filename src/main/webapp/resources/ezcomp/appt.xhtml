@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -15,78 +15,96 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <p>
-            <h:panelGroup layout="block" rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
-                <h:outputLabel value="Appt ID #{cc.attrs.appt.id}" for="apptId" />
-                <h:inputHidden id="apptId" value="#{cc.attrs.appt.id}" />
-                <h:message for="apptId" errorStyle="color: red" infoStyle="color: green"/>
-            </h:panelGroup>
-        </p>
+        <h:form>
+            <p>
+                <h:panelGroup layout="block" rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
+                    <h:outputLabel value="Appt ID #{cc.attrs.appt.id}" for="apptId" />
+                    <h:inputHidden id="apptId" value="#{cc.attrs.appt.id}" />
+                    <h:message for="apptId" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
-        <p>
-            <h:panelGroup layout="block">
-                <h:outputLabel value="Appt Date" for="apptDate"/>
-                <h:inputText 
-                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
-                    p:type="date" id="apptDate" value="#{cc.attrs.appt.date}">
-                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
-                </h:inputText>
-                <h:message for="apptDate" errorStyle="color: red" infoStyle="color: green"/>
-            </h:panelGroup>
-        </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Appt Date" for="apptDate"/>
+                    <h:inputText 
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        p:type="date" id="apptDate" value="#{cc.attrs.appt.date}">
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                    <h:message for="apptDate" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
 
-        <p>
-            <h:panelGroup layout="block">
-                <h:outputLabel value="Appt Time" for="apptTime"/>
-                <h:inputText 
-                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
-                    p:type="time" id="apptTime" value="#{cc.attrs.appt.time}">
-                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
-                </h:inputText>
-                <h:message for="apptTime" errorStyle="color: red" infoStyle="color: green"/>
-            </h:panelGroup>
-        </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Appt Time" for="apptTime"/>
+                    <h:inputText 
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        p:type="time" id="apptTime" value="#{cc.attrs.appt.time}">
+                        <f:convertDateTime type="localTime" pattern="HH:mm" />
+                    </h:inputText>
+                    <h:message for="apptTime" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
-        <p>
-            <h:panelGroup layout="block" >
-                <h:outputLabel value="Manufacturer ID #{cc.attrs.appt.manufacturer.id}(#{cc.attrs.appt.manufacturer.name})" for="manufacturerId" />
-                <h:inputHidden id="manufacturerId" value="#{cc.attrs.appt.manufacturer.id}" />
-                <h:message for="manufacturerId" errorStyle="color: red" infoStyle="color: green"/>
-            </h:panelGroup>
-        </p>
+            <p>
+                <h:panelGroup layout="block" >
+                    <h:outputLabel value="Manufacturer ID #{cc.attrs.appt.manufacturer.id}(#{cc.attrs.appt.manufacturer.name})" for="manufacturerId" />
+                    <h:inputHidden id="manufacturerId" value="#{cc.attrs.appt.manufacturer.id}" />
+                    <h:message for="manufacturerId" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
-        <p>
-            <h:panelGroup layout="block">
-                <h:outputLabel value="Car " for="car"/>
-                <h:selectOneMenu 
-                    id="car" 
-                    converter="carConverter"
-                    readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
-                    disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
-                    value="#{cc.attrs.appt.car}">
-                    <f:selectItems var="c" 
-                                   value="#{cc.attrs.appt.manufacturer.cars}"
-                                   itemLabel="#{c.name}"
-                                   itemValue="#{c}" />
-                </h:selectOneMenu>
-                <h:message for="car" errorStyle="color: red" infoStyle="color: green"/>
-            </h:panelGroup>
-        </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Car " for="car"/>
+                    <h:selectOneMenu 
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        id="car" value="#{cc.attrs.appt.car}" converter="carConverter">
+                        <f:selectItems var="c" 
+                                       value="#{cc.attrs.appt.manufacturer.cars}"
+                                       itemLabel="#{c.name}"
+                                       itemValue="#{c}" />
+                    </h:selectOneMenu>
+                    <h:message for="car" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
-        <h:commandButton 
-            rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
-            value="Schedule Appt" 
-            action="#{cc.attrs.action}" />
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel value="Salesstaff " for="salesstaff"/>
+                    <h:selectOneMenu 
+                        id="salesstaff" 
+                        converter="salesstaffConverter"
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        value="#{cc.attrs.appt.salesstaff}">
+                        <f:selectItems var="s" 
+                                       value="#{salesstaffService.findAll()}"
+                                       itemLabel="#{s.id}"
+                                       itemValue="#{s}" />
+                    </h:selectOneMenu>
+                    <h:message for="salesstaff" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
-        <h:commandButton 
-            rendered="#{cc.attrs.operation.equalsIgnoreCase('edit')}"
-            value="Modify Appt" 
-            action="#{cc.attrs.action}" />
+            <h:commandButton 
+                rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
+                value="Schedule Appt" 
+                action="#{cc.attrs.action}" />
 
-        <h:commandButton 
-            rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}"
-            value="Cancel Appt" 
-            action="#{cc.attrs.action}" />
+            <h:commandButton 
+                rendered="#{cc.attrs.operation.equalsIgnoreCase('edit')}"
+                value="Modify Appt" 
+                action="#{cc.attrs.action}" />
+
+            <h:commandButton 
+                rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}"
+                value="Cancel Appt" 
+                action="#{cc.attrs.action}" />
+        </h:form>
     </cc:implementation>
 </html>
