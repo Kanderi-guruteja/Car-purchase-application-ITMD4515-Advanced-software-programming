@@ -7,12 +7,14 @@ package edu.iit.sat.itmd4515.gkanderi.service;
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.Manufacturer;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 import java.util.List;
 
 /**
  *
  * @author 18722
  */
+@Named
 @Stateless
 public class ManufacturerService extends AbstractService<Manufacturer> {
 

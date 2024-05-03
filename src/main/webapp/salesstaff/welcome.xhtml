@@ -13,6 +13,8 @@
     <ui:define name="content">
         Welcome #{loginController.authenticatedUser}! to the Sales_staff section of the Car Purchase application
 
+        <h:link outcome="/salesstaff/schedAppt.xhtml" value="Schedule New Appointment"/>
+        
         <h:dataTable 
                 styleClass="table table-striped table-hover"
                 value="#{salesstaffWelcomeController.salesstaff.appointments}" 

@@ -30,7 +30,7 @@ public class SalesstaffApptController {
     }
 
     @PostConstruct
-    public void postConstruct() {
+    private void postConstruct() {
         LOG.info("Inside SalesstaffApptController postConstruct");
         appt = new Appointment();
         appt.setCar(new Car());

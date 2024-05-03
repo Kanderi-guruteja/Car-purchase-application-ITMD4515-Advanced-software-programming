@@ -11,6 +11,7 @@
         <cc:attribute name ="operation" required="true" type="java.lang.String"/>
         <cc:attribute name="appt" type="edu.iit.sat.itmd4515.gkanderi.domain.Appointment" required="true" />
         <cc:attribute name="action" required="false" method-signature="java.lang.String action()"/>
+        <cc:attribute name="admin" required="false" default="false" type="java.lang.Boolean"/>
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
@@ -48,17 +49,50 @@
                     <h:message for="apptTime" errorStyle="color: red" infoStyle="color: green"/>
                 </h:panelGroup>
             </p>
+            
+             <p>
+                <h:panelGroup layout="block" rendered="cc.attrs.admin">
+                    <h:outputLabel value="Manufacturer " for="adminManufacturer"/>
+                    <h:selectOneMenu 
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        id="adminManufacturer" value="#{cc.attrs.appt.manufacturer}" converter="manufacturerConverter">
+                        <f:selectItems var="m" 
+                                       value="#{manufacturerService.findAll()}"
+                                       itemLabel="#{o.name}"
+                                       itemValue="#{o}" />
+                    </h:selectOneMenu>
+                    <h:message for="adminManufacturer" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
 
             <p>
-                <h:panelGroup layout="block" >
+                <h:panelGroup layout="block" rendered="#{not cc.attrs.admin}">
                     <h:outputLabel value="Manufacturer ID #{cc.attrs.appt.manufacturer.id}(#{cc.attrs.appt.manufacturer.name})" for="manufacturerId" />
                     <h:inputHidden id="manufacturerId" value="#{cc.attrs.appt.manufacturer.id}" />
                     <h:message for="manufacturerId" errorStyle="color: red" infoStyle="color: green"/>
                 </h:panelGroup>
             </p>
+            
+             <p>
+                <h:panelGroup layout="block" rendered="cc.attrs.admin">
+                    <h:outputLabel value="Car " for="adminCar"/>
+                    <h:selectOneMenu 
+                        readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        disabled="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                        id="adminCar" value="#{cc.attrs.appt.car}" converter="carConverter">
+                        <f:selectItems var="c" 
+                                       value="#{carService.findAll()}"
+                                       itemLabel="#{c.name}"
+                                       itemValue="#{c}" />
+                    </h:selectOneMenu>
+                    <h:message for="adminCar" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+            </p>
+            
 
             <p>
-                <h:panelGroup layout="block">
+                <h:panelGroup layout="block" rendered="#{not cc.attrs.admin}">
                     <h:outputLabel value="Car " for="car"/>
                     <h:selectOneMenu 
                         readonly="#{cc.attrs.operation.equalsIgnoreCase('view') or cc.attrs.operation.equalsIgnoreCase('delete')}"

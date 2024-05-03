@@ -38,7 +38,7 @@ public class SalesstaffWelcomeController {
     }
 
     @PostConstruct
-public void postConstruct() {
+private void postConstruct() {
     LOG.info("SalesstaffWelcomeController.postConstruct");
     String username = loginController.getAuthenticatedUser();
     if (username != null) {
