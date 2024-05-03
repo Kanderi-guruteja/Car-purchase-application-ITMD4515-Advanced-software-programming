@@ -11,6 +11,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
+import jakarta.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -24,9 +25,11 @@ import java.util.Objects;
 @Entity
 @NamedQuery(name = "Appointment.findAll", query = "select a FROM Appointment a")
 public class Appointment extends AbstractEntity {
-
+    
+    @FutureOrPresent
     @Column(name = "APPT_DATE")
     private LocalDate date;
+    
     @Column(name = "APPT_TIME")
     private LocalTime time;
 

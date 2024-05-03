@@ -32,31 +32,31 @@ public class ManufacturerApptController {
     public String displayViewApptPage(Appointment appt) {
         this.appt = appt;
         LOG.info("Inside ManufacturerApptController displayViewApptPage with " + appt.toString());
-        return "manufacturer/welcome.xhtml";
+        return "/manufacturer/welcome.xhtml";
     }
 
     public String displayEditApptPage(Appointment appt) {
         this.appt = appt;
         LOG.info("Inside ManufacturerApptController displayEditApptPage with " + appt.toString());
-        return "manufacturer/welcome.xhtml";
+        return "/manufacturer/welcome.xhtml";
     }
 
     public String displayDeleteApptPage(Appointment appt) {
         this.appt = appt;
         LOG.info("Inside ManufacturerApptController displayDeleteApptPage with " + appt.toString());
-        return "manufacturer/welcome.xhtml";
+        return "/manufacturer/welcome.xhtml";
     }
 
     public String displayScheduleApptPage(Car c) {
-        appt.setCar(c);
-        LOG.info("Inside ManufacturerApptController displayScheduleApptPage with " + appt.toString());
-        return "manufacturer/schedAppt?faces-redirect=true";
-    }
+    appt.setCar(c);
+    LOG.info("Inside ManufacturerApptController displayScheduleApptPage with " + appt.toString());
+    return "/manufacturer/schedAppt.xhtml";
+}
 
     public String scheduleAppointment() {
         LOG.info("Inside ManufacturerApptController scheduleAppointment with " + appt.toString());
         mwc.refreshManufacturerModel();
-        return "manufacturer/welcome?faces-redirect=true";
+        return "/manufacturer/welcome.xhtml";
     }
 
     public Appointment getAppt() {
