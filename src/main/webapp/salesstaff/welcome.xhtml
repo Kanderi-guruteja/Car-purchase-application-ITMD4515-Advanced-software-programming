@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="../WEB-INF/templates/authenticatedTemplate.xhtml"
-                xmlns:h="jakarta.faces.html">
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
 
     <ui:define name="title">
         Sales_staff
@@ -12,6 +13,64 @@
     <ui:define name="content">
         Welcome #{loginController.authenticatedUser}! to the Sales_staff section of the Car Purchase application
 
+        <h:dataTable 
+                styleClass="table table-striped table-hover"
+                value="#{salesstaffWelcomeController.salesstaff.appointments}" 
+                var="appt">
+                <h:column>
+                    <f:facet name="header">Appt ID</f:facet>
+                    <h:outputText value="#{appt.id}"/>
+                </h:column>
+
+               <h:column>
+                    <f:facet name="header">Appt Date</f:facet>
+                    <h:outputText value="#{appt.date}">
+                        <f:convertDateTime type="localDate" dateStyle="full"/>
+                    </h:outputText>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header">Appt Time</f:facet>
+                    <h:outputText value="#{appt.time}">
+                        <f:convertDateTime type="localTime" dateStyle="full"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Manufacturer Name</f:facet>
+                    <h:outputText value="#{appt.manufacturer.name}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header"># Car Name</f:facet>
+                    <h:outputText value="#{appt.car.name}"/>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header"># Car Type</f:facet>
+                    <h:outputText value="#{appt.car.type}"/>
+                </h:column>
+                
+                 <h:column>
+                    <f:facet name="header"># Sales_staff ID</f:facet>
+                    <h:outputText value="#{appt.salesstaff.id}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"># Sales_staff Leasing_office</f:facet>
+                    <h:outputText value="#{appt.salesstaff.leasingoffice.leasingofficeName}"/>
+                </h:column>
+                
+                <h:column>
+                    <h:form>
+                        <h:commandButton value="view" action="#{salesstaffApptController.displayViewApptPage(appt)}"/>
+                        <h:commandButton value="edit" action="#{salesstaffApptController.displayEditApptPage(appt)}"/>
+                        <h:commandButton value="Delete" action="#{salesstaffApptController.displayDeleteApptPage(appt)}"/>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+        
     </ui:define>
 
 </ui:composition>
