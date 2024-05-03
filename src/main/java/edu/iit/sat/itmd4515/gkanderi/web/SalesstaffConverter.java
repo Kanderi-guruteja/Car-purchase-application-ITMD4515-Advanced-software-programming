@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package edu.iit.sat.itmd4515.gkanderi.service;
+package edu.iit.sat.itmd4515.gkanderi.web;
 
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
-import edu.iit.sat.itmd4515.gkanderi.service.CarService;
 import edu.iit.sat.itmd4515.gkanderi.service.SalesstaffService;
 import jakarta.ejb.EJB;
 import jakarta.faces.component.UIComponent;

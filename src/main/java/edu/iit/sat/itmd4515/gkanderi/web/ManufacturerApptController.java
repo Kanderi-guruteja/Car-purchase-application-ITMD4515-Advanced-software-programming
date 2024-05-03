@@ -3,7 +3,9 @@ package edu.iit.sat.itmd4515.gkanderi.web;
 import edu.iit.sat.itmd4515.gkanderi.domain.Appointment;
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
+import edu.iit.sat.itmd4515.gkanderi.service.AppointmentService;
 import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -19,6 +21,8 @@ public class ManufacturerApptController {
 
     @Inject
     ManufacturerWelcomeController mwc;
+    
+    @EJB AppointmentService AppointmentService;
 
     @PostConstruct
     private void postConstruct() {
@@ -55,6 +59,7 @@ public class ManufacturerApptController {
 
     public String scheduleAppointment() {
         LOG.info("Inside ManufacturerApptController scheduleAppointment with " + appt.toString());
+        AppointmentService.scheduleAppointment(appt);
         mwc.refreshManufacturerModel();
         return "/manufacturer/welcome.xhtml";
     }
