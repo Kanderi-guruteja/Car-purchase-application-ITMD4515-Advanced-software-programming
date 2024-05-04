@@ -13,9 +13,14 @@
     </ui:define>
 
     <ui:define name="content">
-        <ezcomp:appt appt="#{manufacturerApptController.appt}"
-                     operation="create"
-                     action="#{manufacturerApptController.scheduleAppointment()}"/>
+        <div style="text-align: center;">
+            <h2 style="color: #007bff; margin-bottom: 20px;">Schedule Appointment</h2>
+            <div style="width: 50%; margin: 0 auto; background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+                <ezcomp:appt appt="#{manufacturerApptController.appt}"
+                             operation="create"
+                             action="#{manufacturerApptController.scheduleAppointment()}"/>
+            </div>
+        </div>
     </ui:define>
 
 </ui:composition>
