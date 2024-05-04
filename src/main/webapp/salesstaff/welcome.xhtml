@@ -19,10 +19,7 @@
             styleClass="table table-striped table-hover"
             value="#{salesstaffWelcomeController.salesstaff.appointments}" 
             var="appointment">
-            <h:column>
-                <f:facet name="header">Appt ID</f:facet>
-                <h:outputText value="#{appointment.id}"/>
-            </h:column>
+           
 
             <h:column>
                 <f:facet name="header">Appt Date</f:facet>
@@ -51,11 +48,6 @@
             <h:column>
                 <f:facet name="header">Pet Type</f:facet>
                 <h:outputText value="#{appointment.car.type}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">salesstaff Id</f:facet>
-                <h:outputText value="#{appointment.salesstaff.id}"/>
             </h:column>
 
             <h:column>

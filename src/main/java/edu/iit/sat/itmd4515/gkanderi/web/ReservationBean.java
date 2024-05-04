@@ -12,6 +12,8 @@ import jakarta.inject.Named;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+
 @Named
 @RequestScoped
 public class ReservationBean {
@@ -67,29 +69,35 @@ public class ReservationBean {
     }
 
     public String reserveCar() {
-        Car selectedCar = defaultWelcomeController.getAvailableCars().stream()
-                .filter(car -> car.getId().equals(selectedCarId))
-                .findFirst()
-                .orElse(null);
+    Car selectedCar = defaultWelcomeController.getAvailableCars().stream()
+            .filter(car -> car.getId().equals(selectedCarId))
+            .findFirst()
+            .orElse(null);
 
-        if (selectedCar != null) {
-            Reservation reservation = new Reservation();
-            reservation.setCar(selectedCar);
-            reservationService.create(reservation);
+    if (selectedCar != null) {
+        Reservation reservation = new Reservation();
+        reservation.setCar(selectedCar);
+        
+        // Set reservation date and time
+        reservation.setReservationDate(LocalDate.now());
+        reservation.setReservationTime(LocalTime.now());
 
-            // Store the reservation object in the session with the key "reservation"
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reservation", reservation);
+        reservationService.create(reservation);
 
-            // Set the log message using the injected instance of ReservationConfirmationBean
-            reservationConfirmationBean.setLogMessage("Reservation details saved successfully.");
+        // Store the reservation object in the session with the key "reservation"
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reservation", reservation);
 
-            // Set the reservationMade flag to true
-            reservationMade = true;
+        // Set the log message using the injected instance of ReservationConfirmationBean
+        reservationConfirmationBean.setLogMessage("Reservation details saved successfully.");
 
-            return "/reservationconfirmation.xhtml?faces-redirect=true";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Selected car not found."));
-            return null;
-        }
+        // Set the reservationMade flag to true
+        reservationMade = true;
+
+        return "/reservationconfirmation.xhtml?faces-redirect=true";
+    } else {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Selected car not found."));
+        return null;
     }
+}
+
 }

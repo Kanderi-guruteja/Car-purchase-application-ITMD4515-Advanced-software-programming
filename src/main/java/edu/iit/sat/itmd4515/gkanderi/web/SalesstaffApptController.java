@@ -23,7 +23,7 @@ public class SalesstaffApptController {
     @Inject
     SalesstaffWelcomeController swc;
     
-    @EJB AppointmentService AppointmentService;
+    @EJB AppointmentService appointmentService;
     
     public SalesstaffApptController(){
         
@@ -57,15 +57,15 @@ public class SalesstaffApptController {
     }
 
     public String displayScheduleApptPage(Car c) {
-    appt.setCar(c);
-    LOG.info("Inside SalesstaffApptController displayScheduleApptPage with " + appt.toString());
-    return "/salesstaff/schedAppt.xhtml";
-}
+        appt.setCar(c);
+        LOG.info("Inside SalesstaffApptController displayScheduleApptPage with " + appt.toString());
+        return "/salesstaff/schedAppt.xhtml";
+    }
 
     public String scheduleAppointment() {
-        appt.setId(null);
-        LOG.info("Inside SalesstaffApptController scheduleAppointment with " + appt.toString());
-        AppointmentService.scheduleAppointment(appt);
+        LOG.info("Inside SalesstaffApptController scheduleAppointment with Appointment{date=" + appt.getDate() + ", time=" + appt.getTime() + "}");
+
+        appointmentService.scheduleAppointment(appt);
         swc.refreshSalesstaffModel();
         return "/salesstaff/welcome.xhtml";
     }

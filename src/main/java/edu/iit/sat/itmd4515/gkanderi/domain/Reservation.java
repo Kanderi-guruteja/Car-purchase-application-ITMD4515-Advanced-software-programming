@@ -6,7 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class Reservation implements Serializable {
@@ -17,10 +19,15 @@ public class Reservation implements Serializable {
     @OneToOne
     private Car car;
     
-    private LocalDateTime reservationDateTime; 
-
+      private LocalTime reservationTime;
+       private LocalDate reservationDate;
+    
+    
     // Add more properties as needed, e.g., user, reservation date, etc.
 
+    
+      
+    
     public Long getId() {
         return id;
     }
@@ -37,13 +44,22 @@ public class Reservation implements Serializable {
         this.car = car;
     }
     
-    public LocalDateTime getReservationDateTime() {
-        return reservationDateTime;
-    }
-    
-     public void setReservationDateTime(LocalDateTime reservationDateTime) {
-        this.reservationDateTime = reservationDateTime;
+    public LocalDate getReservationDate() {
+        return reservationDate;
     }
 
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+     
+    
+
     // Add getters and setters for other properties
+public LocalTime getReservationTime() {
+        return reservationTime;
+    }
+
+    public void setReservationTime(LocalTime reservationTime) {
+        this.reservationTime = reservationTime;
+    }
 }
