@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
- * @author 18722
+ * The Car class represents a car entity.
+ * It contains information such as name, purchase date, and type of the car.
  */
 @Entity
 @Table(name = "CAR")
@@ -37,7 +37,6 @@ public class Car extends AbstractEntity {
     private LocalDate buyDate;
 
     @Column(name = "Car_Type")
-
     @NotNull
     @Enumerated(EnumType.STRING)
     private CarType type;
@@ -48,18 +47,38 @@ public class Car extends AbstractEntity {
     @ManyToMany(mappedBy = "cars")
     private List<Appointment> appointments = new ArrayList<>();
 
+    /**
+     * Get the list of appointments associated with the car.
+     *
+     * @return the list of appointments associated with the car
+     */
     public List<Appointment> getAppointments() {
         return appointments;
     }
 
+    /**
+     * Set the list of appointments associated with the car.
+     *
+     * @param appointments the new list of appointments associated with the car
+     */
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 
+    /**
+     * Get the list of manufacturers associated with the car.
+     *
+     * @return the list of manufacturers associated with the car
+     */
     public List<Manufacturer> getManufacturer() {
         return manufacturers;
     }
 
+    /**
+     * Set the list of manufacturers associated with the car.
+     *
+     * @param manufacturer the new list of manufacturers associated with the car
+     */
     public void setManufacturer(List<Manufacturer> manufacturer) {
         this.manufacturers = manufacturer;
     }
@@ -95,35 +114,75 @@ public class Car extends AbstractEntity {
         return "Car{" + "id=" + id + ", name=" + name + ", buyDate=" + buyDate + ", type=" + type + '}';
     }
 
+    /**
+     * Constructs a car with default values.
+     */
     public Car() {
     }
 
+    /**
+     * Constructs a car with the specified name, purchase date, and type.
+     *
+     * @param name the name of the car
+     * @param buyDate the purchase date of the car
+     * @param type the type of the car
+     */
     public Car(String name, LocalDate buyDate, CarType type) {
         this.name = name;
         this.buyDate = buyDate;
         this.type = type;
     }
 
+    /**
+     * Get the type of the car.
+     *
+     * @return the type of the car
+     */
     public CarType getType() {
         return type;
     }
 
+    /**
+     * Set the type of the car.
+     *
+     * @param type the new type of the car
+     */
     public void setType(CarType type) {
         this.type = type;
     }
 
+    /**
+     * Get the purchase date of the car.
+     *
+     * @return the purchase date of the car
+     */
     public LocalDate getBuyDate() {
         return buyDate;
     }
 
+    /**
+     * Set the purchase date of the car.
+     *
+     * @param buyDate the new purchase date of the car
+     */
     public void setBuyDate(LocalDate buyDate) {
         this.buyDate = buyDate;
     }
 
+    /**
+     * Get the name of the car.
+     *
+     * @return the name of the car
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set the name of the car.
+     *
+     * @param name the new name of the car
+     */
     public void setName(String name) {
         this.name = name;
     }

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edu.iit.sat.itmd4515.gkanderi.domain;
 
 import jakarta.persistence.Column;
@@ -13,8 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
- * @author 18722
+ * Entity class representing a leasing office.
  */
 @Entity
 @XmlRootElement
@@ -24,6 +27,11 @@ public class Leasingoffice extends AbstractEntity {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Creates a new leasing office.
+     *
+     * @param leasingoffice the leasing office to create
+     */
     public void create(Leasingoffice leasingoffice) {
         entityManager.persist(leasingoffice);
     }
@@ -40,29 +48,62 @@ public class Leasingoffice extends AbstractEntity {
     @OneToMany(mappedBy = "leasingoffice")
     private List<Salesstaff> salesstaffList = new ArrayList<>();
 
+    /**
+     * Gets the name of the leasing office.
+     *
+     * @return the name of the leasing office
+     */
     public String getLeasingofficeName() {
         return leasingofficeName;
     }
 
+    /**
+     * Constructs a new instance of the leasing office.
+     */
     public Leasingoffice() {
     }
 
+    /**
+     * Constructs a new instance of the leasing office with the specified name.
+     *
+     * @param leasingofficeName the name of the leasing office
+     */
     public Leasingoffice(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }
 
+    /**
+     * Gets the list of sales staff associated with this leasing office.
+     *
+     * @return the list of sales staff associated with this leasing office
+     */
     public List<Salesstaff> getSalesstaffList() {
         return salesstaffList;
     }
 
+    /**
+     * Sets the list of sales staff associated with this leasing office.
+     *
+     * @param salesstaffList the list of sales staff associated with this leasing office
+     */
     public void setSalesstaffList(List<Salesstaff> salesstaffList) {
         this.salesstaffList = salesstaffList;
     }
 
+    /**
+     * Adds a sales staff to this leasing office.
+     *
+     * @param salesstaff the sales staff to add
+     */
     public void addSalesstaff(Salesstaff salesstaff) {
         salesstaff.setLeasingoffice(this);
     }
 
+    /**
+     * Sets the name of the leasing office.
+     *
+     * @param leasingofficeName the name of the leasing office
+     */
     public void setLeasingofficeName(String leasingofficeName) {
         this.leasingofficeName = leasingofficeName;
     }

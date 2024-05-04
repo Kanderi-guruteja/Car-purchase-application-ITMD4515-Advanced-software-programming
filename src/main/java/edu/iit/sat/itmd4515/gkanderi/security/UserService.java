@@ -5,16 +5,26 @@ import jakarta.ejb.Stateless;
 import java.util.List;
 
 /**
- *
+ * This class provides services related to the User entity.
+ * It extends the AbstractService class and is annotated as Stateless.
+ * 
  * @author 18722
  */
 @Stateless
 public class UserService extends AbstractService<User> {
 
+    /**
+     * Constructs a new UserService.
+     */
     public UserService() {
         super(User.class);
     }
 
+    /**
+     * Retrieves all users from the database.
+     * 
+     * @return A list of all users.
+     */
     public List<User> findAll() {
         return super.findAll("User.findAll");
     }

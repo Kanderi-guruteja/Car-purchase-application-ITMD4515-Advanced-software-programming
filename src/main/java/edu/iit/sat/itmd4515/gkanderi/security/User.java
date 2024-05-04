@@ -12,6 +12,14 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entity class representing a user in the security system.
+ * Each user has a username, password, full name, email, and a list of associated groups.
+ * 
+ * The user entity is mapped to the SEC_USER table in the database.
+ * 
+ * @author 18722
+ */
 @Entity
 @Table(name = "SEC_USER")
 @EntityListeners(UserPasswordHash.class)
@@ -35,6 +43,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "GROUPNAME"))
     private List<Group> groups = new ArrayList<>();
 
+    // Constructors
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -61,6 +70,7 @@ public class User {
         this.email = email;
     }
 
+    // Methods to manage user groups
     public void addGroup(Group g) {
         this.groups.add(g);
         g.getUsers().add(this);
@@ -71,6 +81,7 @@ public class User {
         g.getUsers().remove(this);
     }
 
+    // Getters and setters for userName
     public String getUserName() {
         return userName;
     }
@@ -79,6 +90,7 @@ public class User {
         this.userName = userName;
     }
 
+    // Getters and setters for password
     public String getPassword() {
         return password;
     }
@@ -87,6 +99,7 @@ public class User {
         this.password = password;
     }
 
+    // Getters and setters for groups
     public List<Group> getGroups() {
         return groups;
     }
@@ -94,7 +107,4 @@ public class User {
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
-
-  
-
 }

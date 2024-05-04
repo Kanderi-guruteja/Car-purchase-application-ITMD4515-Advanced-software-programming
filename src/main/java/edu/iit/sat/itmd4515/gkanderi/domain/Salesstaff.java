@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edu.iit.sat.itmd4515.gkanderi.domain;
 
 import jakarta.persistence.Column;
@@ -15,7 +19,8 @@ import java.util.Objects;
 import edu.iit.sat.itmd4515.gkanderi.security.User;
 
 /**
- *
+ * Represents a sales staff member.
+ * 
  * @author 18722
  */
 @NamedQuery(name = "Salesstaff.findAll", query = "select s FROM Salesstaff s")
@@ -44,58 +49,99 @@ public class Salesstaff {
     private List<Appointment> appointments = new ArrayList<>();
 
     /**
-     * Get the value of user
+     * Get the user associated with the sales staff.
      *
-     * @return the value of user
+     * @return the user associated with the sales staff
      */
     public User getUser() {
         return user;
     }
 
     /**
-     * Set the value of user
+     * Set the user associated with the sales staff.
      *
-     * @param user new value of user
+     * @param user the user associated with the sales staff
      */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Get the list of appointments associated with the sales staff.
+     *
+     * @return the list of appointments associated with the sales staff
+     */
     public List<Appointment> getAppointments() {
         return appointments;
     }
 
+    /**
+     * Set the list of appointments associated with the sales staff.
+     *
+     * @param appointments the list of appointments associated with the sales staff
+     */
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
 
-    // Default constructor
+    /**
+     * Default constructor for the Salesstaff class.
+     */
     public Salesstaff() {
     }
 
+    /**
+     * Get the ID of the sales staff.
+     *
+     * @return the ID of the sales staff
+     */
     public Long getId() {
         return id;
     }
 
-    // Constructor with parameters
+    /**
+     * Constructor for the Salesstaff class.
+     *
+     * @param name the name of the sales staff
+     */
     public Salesstaff(String name) {
         this.name = name;
     }
 
+    /**
+     * Get the leasing office associated with the sales staff.
+     *
+     * @return the leasing office associated with the sales staff
+     */
     public Leasingoffice getLeasingoffice() {
         return leasingoffice;
     }
 
-    // Setter method for leasing office
+    /**
+     * Set the leasing office associated with the sales staff.
+     *
+     * @param leasingoffice the leasing office associated with the sales staff
+     */
     public void setLeasingoffice(Leasingoffice leasingoffice) {
         this.leasingoffice = leasingoffice;
     }
 
+    /**
+     * Generate a hash code for the sales staff.
+     *
+     * @return the hash code generated for the sales staff
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
     }
 
+    /**
+     * Check if the given object is equal to this sales staff.
+     *
+     * @param o the object to compare with this sales staff
+     * @return true if the given object is equal to this sales staff, otherwise false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -109,6 +155,11 @@ public class Salesstaff {
                 && Objects.equals(name, that.name);
     }
 
+    /**
+     * Get a string representation of the sales staff.
+     *
+     * @return a string representation of the sales staff
+     */
     @Override
     public String toString() {
         return "Salesstaff{"

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.iit.sat.itmd4515.gkanderi.web;
 
 import edu.iit.sat.itmd4515.gkanderi.domain.Car;
@@ -16,9 +12,10 @@ import jakarta.inject.Named;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
- *
+ * The ManufacturerCarController class manages cars for manufacturers in the web application.
+ * It provides methods for displaying, editing, deleting, and saving cars.
+ * 
  * @author 18722
  */
 @Named
@@ -26,118 +23,127 @@ import java.util.logging.Logger;
 public class ManufacturerCarController {
 
     private static final Logger LOG = Logger.getLogger(ManufacturerCarController.class.getName());
-    
-    @EJB CarService CarService;
-    @EJB ManufacturerService ManufacturerService;
-    @Inject ManufacturerWelcomeController mwc;
-    
+
+    @EJB
+    CarService CarService;
+
+    @EJB
+    ManufacturerService ManufacturerService;
+
+    @Inject
+    ManufacturerWelcomeController mwc;
+
     private Car car;
 
-    public ManufacturerCarController() {
-    }
-
+    /**
+     * Initializes the ManufacturerCarController after construction.
+     */
     @PostConstruct
     private void postConstruct() {
         car = new Car();
         LOG.info("CarController.postConstruct");
     }
-    public CarType[] getAllCarTypesForForm(){
+
+    /**
+     * Retrieves all car types for a form.
+     * 
+     * @return An array of car types.
+     */
+    public CarType[] getAllCarTypesForForm() {
         return CarType.values();
     }
-    
-    // action methods
+
     /**
-     * MVC style JSF navigation method for viewing a pet in read-only mode
-     *
-     * Step 1 - Accept the "click" and set the model with the associated
-     * parameter, typically coming from a JSF data table.
-     *
-     * Step 2 - Navigating the user to the intended or appropriate JSF view to
-     * complete their operation.
-     *
-     * Step 3 - If applicable, is invoking the action or application (in JSF
-     * lifecycle terminology), and then likely returning the user to some other
-     * view as a final result.  This would effectively mean, handling the click 
-     * from the JSF view in step 2, in order to perform the operation the user
-     * is trying to accomplish.
-     *
-     * @param p
-     * @return
+     * Displays the view car page for a given car.
+     * 
+     * @param c The car to view.
+     * @return The outcome page.
      */
-    
-    
-   public String displayViewCarPage(Car c) {
-        // Step 1 - accept the click and set the model
+    public String displayViewCarPage(Car c) {
         this.car = c;
         LOG.info("Inside displayViewCarPage with model " + c.toString());
-
-        // Step 2 - navigate the user to the intended or appropriate JSF view
         return "/manufacturer/viewCar.xhtml";
     }
 
+    /**
+     * Displays the edit car page for a given car.
+     * 
+     * @param c The car to edit.
+     * @return The outcome page.
+     */
     public String displayEditCarPage(Car c) {
-        // Step 1 - accept the click and set the model
         this.car = c;
         LOG.info("Inside displayEditCarPage with model " + c.toString());
-
-        // Step 2 - navigate the user to the intended or appropriate JSF view
         return "/manufacturer/editCar.xhtml";
     }
-   
-   
-       public String displayDeleteCarPage(Car c) {
-        // Step 1 - accept the click and set the model
+
+    /**
+     * Displays the delete car page for a given car.
+     * 
+     * @param c The car to delete.
+     * @return The outcome page.
+     */
+    public String displayDeleteCarPage(Car c) {
         this.car = c;
         LOG.info("Inside displayDeleteCarPage with model " + c.toString());
-
-        // Step 2 - navigate the user to the intended or appropriate JSF view
         return "/manufacturer/deleteCar.xhtml";
     }
-   
-   
 
+    /**
+     * Saves the car.
+     * 
+     * @return The outcome page after saving the car.
+     */
     public String saveCar() {
         LOG.info("saveCar has been invoked with model: " + this.car.toString());
-
         ManufacturerService.createCarForManufacturer(mwc.getManufacturer(), car);
-
         LOG.info("saveCar after calling service layer: " + this.car.toString());
-        
         mwc.refreshManufacturerModel();
-        
         return "welcome.xhtml";
     }
-    
- public String editCar() {
-    LOG.info("editCar has been invoked with model: " + this.car.toString());
-    
-    // Check if the car has a valid id before editing
-    if (this.car.getId() != null) {
-        LOG.info("Car ID: " + this.car.getId()); // Add this line for debugging
-        CarService.editCarForExistingManufacturer(car);
-        mwc.refreshManufacturerModel();
-    } else {
-        LOG.warning("Cannot edit car. Car ID is null.");
-        // Handle the error appropriately, e.g., display a message to the user
+
+    /**
+     * Edits the car.
+     * 
+     * @return The outcome page after editing the car.
+     */
+    public String editCar() {
+        LOG.info("editCar has been invoked with model: " + this.car.toString());
+        if (this.car.getId() != null) {
+            LOG.info("Car ID: " + this.car.getId());
+            CarService.editCarForExistingManufacturer(car);
+            mwc.refreshManufacturerModel();
+        } else {
+            LOG.warning("Cannot edit car. Car ID is null.");
+        }
+        return "/manufacturer/welcome.xhtml";
     }
 
-    return "/manufacturer/welcome.xhtml";
-}
+    /**
+     * Deletes the car.
+     * 
+     * @return The outcome page after deleting the car.
+     */
+    public String deleteCar() {
+        LOG.info("deleteCar has been invoked with model: " + this.car.toString());
+        return "/manufacturer/welcome.xhtml";
+    }
 
-
-
-public String deleteCar() {
-    LOG.info("deleteCar has been invoked with model: " + this.car.toString());
-    return "/manufacturer/welcome.xhtml";
-}
-    
-    
+    /**
+     * Retrieves the car.
+     * 
+     * @return The car.
+     */
     public Car getCar() {
         return car;
     }
 
+    /**
+     * Sets the car.
+     * 
+     * @param car The car to set.
+     */
     public void setCar(Car car) {
         this.car = car;
     }
-
 }

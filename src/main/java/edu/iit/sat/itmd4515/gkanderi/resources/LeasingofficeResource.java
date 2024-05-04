@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- *
+ * Resource class for handling leasing office related requests.
+ * Provides endpoints for CRUD operations on leasing offices.
+ * 
  * @author 18722
  */
 @Path("/carleasing/leasingoffices")
@@ -33,6 +35,11 @@ public class LeasingofficeResource {
     @EJB
     LeasingofficeService leasingofficeService;
 
+    /**
+     * Endpoint to retrieve all leasing offices.
+     * 
+     * @return a list of all leasing offices
+     */
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Leasingoffice> getAllLeasingoffices() {
@@ -41,6 +48,12 @@ public class LeasingofficeResource {
         return leasingoffices;
     }
 
+    /**
+     * Endpoint to create a new leasing office.
+     * 
+     * @param leasingoffice the leasing office to be created
+     * @return the created leasing office
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -50,6 +63,12 @@ public class LeasingofficeResource {
         return leasingoffice;
     }
 
+    /**
+     * Endpoint to retrieve a leasing office by its ID.
+     * 
+     * @param id the ID of the leasing office to retrieve
+     * @return the leasing office with the specified ID
+     */
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -63,6 +82,13 @@ public class LeasingofficeResource {
         return leasingoffice;
     }
 
+    /**
+     * Endpoint to update an existing leasing office.
+     * 
+     * @param id the ID of the leasing office to update
+     * @param updatedLeasingoffice the updated leasing office data
+     * @return a response indicating the success or failure of the update operation
+     */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -97,6 +123,12 @@ public class LeasingofficeResource {
                 .build();
     }
 
+    /**
+     * Endpoint to delete a leasing office by its ID.
+     * 
+     * @param id the ID of the leasing office to delete
+     * @return a response indicating the success or failure of the delete operation
+     */
     @DELETE
     @Path("/{id}")
     public Response deleteLeasingoffice(@PathParam("id") Long id) {

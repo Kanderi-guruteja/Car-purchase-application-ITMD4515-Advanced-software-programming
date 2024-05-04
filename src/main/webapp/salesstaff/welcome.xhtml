@@ -19,6 +19,11 @@
             styleClass="table table-striped table-hover"
             value="#{salesstaffWelcomeController.salesstaff.appointments}" 
             var="appointment">
+            
+             <h:column>
+                <f:facet name="header">APPT id</f:facet>
+                <h:outputText value="#{appointment.id}"/>
+            </h:column>
            
 
             <h:column>

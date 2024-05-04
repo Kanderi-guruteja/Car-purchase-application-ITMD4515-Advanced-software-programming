@@ -19,7 +19,12 @@ import java.time.LocalTime;
 import java.util.logging.Logger;
 
 /**
- *
+ * Initializes the database with sample data upon application startup.
+ * This class is annotated with @Startup and @Singleton to ensure that it runs once during application startup.
+ * It injects various service classes to create and manage entities in the database.
+ * This class creates sample sales staff, manufacturers, cars, appointments, and leasing offices.
+ * It also establishes relationships between these entities.
+ * 
  * @author 18722
  */
 @Startup
@@ -35,7 +40,7 @@ public class StartupDbInitializer {
     private CarService carService;
 
     @EJB
-    private SalesstaffService salesstaffService; // Inject SalesstaffService
+    private SalesstaffService salesstaffService;
 
     @EJB
     private ManufacturerService manufacturerService;
@@ -45,64 +50,70 @@ public class StartupDbInitializer {
 
     @EJB
     UserService userService;
+
     @EJB
     GroupService groupService;
 
+    /**
+     * Default constructor.
+     */
     public StartupDbInitializer() {
     }
 
+    /**
+     * Method called after the constructor to initialize the database with sample data.
+     */
     @PostConstruct
     public void postConstruct() {
 
         LOG.info("StartupDbInitializer.PostConstruct");
 
-        Group SalesstaffGroup = new Group("SALESSTAFF_GROUP", "security realm salesstaff group");
-        Group ManufacturerGroup = new Group("MANUFACTURER_GROUP", "security realm Manufacturer group");
-        Group AdminGroup = new Group("ADMIN_GROUP", "security realm Admin group users");
+        // Create security groups
+        Group salesStaffGroup = new Group("SALESSTAFF_GROUP", "Security realm sales staff group");
+        Group manufacturerGroup = new Group("MANUFACTURER_GROUP", "Security realm manufacturer group");
+        Group adminGroup = new Group("ADMIN_GROUP", "Security realm admin group users");
 
-        groupService.create(AdminGroup);
-        groupService.create(ManufacturerGroup);
-        groupService.create(SalesstaffGroup);
+        // Persist security groups
+        groupService.create(adminGroup);
+        groupService.create(manufacturerGroup);
+        groupService.create(salesStaffGroup);
 
-        //user1
-        User Salesstaff1 = new User("salesstaff1", "salesstaff1");
-        Salesstaff1.addGroup(SalesstaffGroup);
-        Salesstaff1.addGroup(AdminGroup);
-        userService.create(Salesstaff1);
+        // Create users
+        User salesStaff1 = new User("salesstaff1", "salesstaff1");
+        salesStaff1.addGroup(salesStaffGroup);
+        salesStaff1.addGroup(adminGroup);
+        userService.create(salesStaff1);
 
-        //user2
-        User Salesstaff2 = new User("salesstaff2", "salesstaff2");
-        Salesstaff2.addGroup(AdminGroup);
-        Salesstaff2.addGroup(ManufacturerGroup);
-        userService.create(Salesstaff2);
+        User salesStaff2 = new User("salesstaff2", "salesstaff2");
+        salesStaff2.addGroup(adminGroup);
+        salesStaff2.addGroup(manufacturerGroup);
+        userService.create(salesStaff2);
 
-        //user3
-        User Salesstaff3 = new User("salesstaff3", "salesstaff3");
-        Salesstaff3.addGroup(SalesstaffGroup);
-        Salesstaff3.addGroup(AdminGroup);
-        userService.create(Salesstaff3);
+        User salesStaff3 = new User("salesstaff3", "salesstaff3");
+        salesStaff3.addGroup(salesStaffGroup);
+        salesStaff3.addGroup(adminGroup);
+        userService.create(salesStaff3);
 
-        //user4
-        User Manufacturer1 = new User("manufacturer1", "manufacturer1");
-        Manufacturer1.addGroup(ManufacturerGroup);
-        userService.create(Manufacturer1);
+        User manufacturer1 = new User("manufacturer1", "manufacturer1");
+        manufacturer1.addGroup(manufacturerGroup);
+        userService.create(manufacturer1);
 
-        //user5
-        User Manufacturer2 = new User("manufacturer2", "manufacturer2");
-        Manufacturer2.addGroup(ManufacturerGroup);
-        userService.create(Manufacturer2);
+        User manufacturer2 = new User("manufacturer2", "manufacturer2");
+        manufacturer2.addGroup(manufacturerGroup);
+        userService.create(manufacturer2);
 
-        //user6
         User admin = new User("admin", "admin");
-        admin.addGroup(AdminGroup);
+        admin.addGroup(adminGroup);
         userService.create(admin);
 
+        // Create leasing offices
         Leasingoffice l1 = new Leasingoffice("Leasingoffice one");
         Leasingoffice l2 = new Leasingoffice("Leasingoffice two");
 
         leasingofficeService.create(l1);
         leasingofficeService.create(l2);
 
+        // Create cars
         Car c1 = new Car("Buick", LocalDate.of(2020, 10, 8), CarType.PETROL);
         Car c2 = new Car("Malibu", LocalDate.of(2021, 10, 9), CarType.ELECTRIC);
         Car c3 = new Car("Ferrari", LocalDate.of(2022, 10, 10), CarType.HYBRID);
@@ -113,50 +124,46 @@ public class StartupDbInitializer {
         carService.create(c3);
         carService.create(c4);
 
-        Salesstaff s1 = new Salesstaff("Petrol vehicles salesstaff");
+        // Create sales staff
+        Salesstaff s1 = new Salesstaff("Petrol vehicles sales staff");
         s1.setLeasingoffice(l1);
-        s1.setUser(Salesstaff1);
-        Salesstaff s2 = new Salesstaff("Diesel vehicles salesstaff");
+        s1.setUser(salesStaff1);
+        Salesstaff s2 = new Salesstaff("Diesel vehicles sales staff");
         s2.setLeasingoffice(l2);
-        s2.setUser(Salesstaff2);
-        Salesstaff s3 = new Salesstaff("Hybrid vehicles salesstaff");
+        s2.setUser(salesStaff2);
+        Salesstaff s3 = new Salesstaff("Hybrid vehicles sales staff");
         s3.setLeasingoffice(l2);
-        s3.setUser(Salesstaff3);
-        Salesstaff s4 = new Salesstaff("Electric vehicles salesstaff");
+        s3.setUser(salesStaff3);
+        Salesstaff s4 = new Salesstaff("Electric vehicles sales staff");
         s4.setLeasingoffice(l1);
-        s4.setUser(Salesstaff1);
+        s4.setUser(salesStaff1);
 
         salesstaffService.create(s1);
         salesstaffService.create(s2);
         salesstaffService.create(s3);
         salesstaffService.create(s4);
 
+        // Create manufacturers
         Manufacturer m1 = new Manufacturer("maker@Buick.com", "Buick_Maker", LocalDate.of(2024, 10, 10));
         m1.addCar(c1);
         m1.addCar(c2);
-        m1.setUser(Manufacturer1);
-        
+        m1.setUser(manufacturer1);
+
         Manufacturer m2 = new Manufacturer("dielseheicles_salesstaff_too@Malibu.com", "Diesel_car_Maker", LocalDate.of(2012, 8, 11));
         m2.addCar(c3);
         m2.addCar(c4);
-        m2.setUser(Salesstaff2);
-        
-       
-        
-        
+        m2.setUser(salesStaff2);
 
         Manufacturer m3 = new Manufacturer("maker@ferrari.com", "Ferrari", LocalDate.of(2013, 5, 20));
         m3.addCar(c1);
         m3.addCar(c3);
-        m3.setUser(Manufacturer2);
-        
-        
+        m3.setUser(manufacturer2);
 
         manufacturerService.create(m1);
         manufacturerService.create(m2);
         manufacturerService.create(m3);
-        //manufacturerService.create(m2);
 
+        // Create appointments
         Appointment a1 = new Appointment(LocalDate.of(2024, 5, 25), LocalTime.of(10, 30));
         a1.schedAppt(m1, c1, s1);
         Appointment a2 = new Appointment(LocalDate.of(2024, 6, 30), LocalTime.of(9, 30));
@@ -167,6 +174,7 @@ public class StartupDbInitializer {
 
         LOG.info("==================================Salesstaff and their JPA relationships==================");
 
+        // Log sales staff and their JPA relationships
         for (Salesstaff s : salesstaffService.findAll()) {
             LOG.info(s.toString());
             LOG.info("");

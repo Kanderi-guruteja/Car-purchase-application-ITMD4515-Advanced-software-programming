@@ -7,8 +7,7 @@ package edu.iit.sat.itmd4515.gkanderi.domain;
 import jakarta.validation.constraints.NotNull;
 
 /**
- *
- * @author 18722
+ * Enum representing the type of a car.
  */
 @NotNull
 public enum CarType {
@@ -23,10 +22,20 @@ public enum CarType {
         this.label = label;
     }
 
+    /**
+     * Get the label associated with the car type.
+     *
+     * @return the label associated with the car type
+     */
     public String getLabel() {
         return label;
     }
 
+    /**
+     * Get an array of all car types for form usage.
+     *
+     * @return an array of all car types for form usage
+     */
     public CarType[] getAllCarTypesForForm() {
         return CarType.values();
     }

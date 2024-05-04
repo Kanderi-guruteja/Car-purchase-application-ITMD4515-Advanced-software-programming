@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.iit.sat.itmd4515.gkanderi.web;
 
 import edu.iit.sat.itmd4515.gkanderi.domain.Salesstaff;
@@ -16,7 +12,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- *
+ * The SalesstaffWelcomeController class manages the sales staff's welcome page.
+ * It retrieves the authenticated sales staff's information and provides methods
+ * to refresh the sales staff's model.
+ * 
  * @author 18722
  */
 @Named
@@ -35,9 +34,10 @@ public class SalesstaffWelcomeController {
     LoginController loginController;
     private Salesstaff Salesstaff;
 
-    public SalesstaffWelcomeController() {
-    }
-
+    /**
+     * Initializes the SalesstaffWelcomeController after construction.
+     * Retrieves the authenticated sales staff's information.
+     */
     @PostConstruct
     private void postConstruct() {
         LOG.info("SalesstaffWelcomeController.postConstruct");
@@ -57,6 +57,9 @@ public class SalesstaffWelcomeController {
         }
     }
 
+    /**
+     * Refreshes the sales staff's model by retrieving the authenticated sales staff's information.
+     */
     public void refreshSalesstaffModel() {
         LOG.info("Refreshing Salesstaff model...");
         String username = loginController.getAuthenticatedUser();
@@ -75,10 +78,20 @@ public class SalesstaffWelcomeController {
         }
     }
 
+    /**
+     * Retrieves the sales staff.
+     * 
+     * @return The sales staff.
+     */
     public Salesstaff getSalesstaff() {
         return Salesstaff;
     }
 
+    /**
+     * Sets the sales staff.
+     * 
+     * @param Salesstaff The sales staff to set.
+     */
     public void setSalesstaff(Salesstaff Salesstaff) {
         this.Salesstaff = Salesstaff;
     }
