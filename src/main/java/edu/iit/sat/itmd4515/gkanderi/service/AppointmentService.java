@@ -31,13 +31,14 @@ public class AppointmentService extends AbstractService<Appointment> {
 
     }
 
-    public void scheduleAppointment(Appointment appt) {
-        Appointment newAppt = new Appointment(appt.getDate(), appt.getTime());
-        newAppt.schedAppt(
-                em.getReference(Manufacturer.class, appt.getManufacturer().getId()), // Assuming getId() returns the primary key of Manufacturer
-                em.getReference(Car.class, appt.getCar().getId()), // Assuming getId() returns the primary key of Car
-                em.getReference(Salesstaff.class, appt.getSalesstaff().getId()) // Assuming getId() returns the primary key of Salesstaff
-        );
-        em.persist(newAppt);
-    }
+   public void scheduleAppointment(Appointment appt) {
+    Appointment newAppt = new Appointment(appt.getDate(), appt.getTime());
+    newAppt.schedAppt(
+            em.getReference(Manufacturer.class, appt.getManufacturer().getId()), 
+            em.getReference(Car.class, appt.getCar().getId()), 
+            em.getReference(Salesstaff.class, appt.getSalesstaff().getId())
+    );
+    em.persist(newAppt);
+    appt.setId(newAppt.getId());
+}
 }

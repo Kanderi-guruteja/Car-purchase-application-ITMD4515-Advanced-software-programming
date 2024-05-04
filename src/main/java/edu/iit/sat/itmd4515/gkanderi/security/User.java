@@ -12,10 +12,6 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author 18722
- */
 @Entity
 @Table(name = "SEC_USER")
 @EntityListeners(UserPasswordHash.class)
@@ -25,8 +21,13 @@ public class User {
     @Id
     @NotBlank(message = "Please enter a username")
     private String userName;
+
     @NotBlank(message = "Please enter a password")
     private String password;
+
+    private String fullName;
+
+    private String email;
 
     @ManyToMany
     @JoinTable(name = "SEC_USER_GROUPS",
@@ -40,6 +41,24 @@ public class User {
     }
 
     public User() {
+    }
+
+    // Getters and setters for fullName
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    // Getters and setters for email
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void addGroup(Group g) {
@@ -75,5 +94,7 @@ public class User {
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
+
+  
 
 }

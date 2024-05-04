@@ -4,6 +4,7 @@
  */
 package edu.iit.sat.itmd4515.gkanderi.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +23,7 @@ public class AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@Column(name = "ID")
+    @Column(name = "ID")
     protected Long id;
 
     @Version

@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.iit.sat.itmd4515.gkanderi.service;
 
-import edu.iit.sat.itmd4515.gkanderi.domain.Leasingoffice;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import java.util.List;
+import java.util.Map;
 
-/**
- *
- * @author 18722
- */
 public abstract class AbstractService<T> {
 
     @PersistenceContext(name = "itmd4515PU")
@@ -42,5 +35,12 @@ public abstract class AbstractService<T> {
 
     protected List<T> findAll(String namedQueryName) {
         return em.createNamedQuery(namedQueryName, entityClass).getResultList();
+    }
+    
+    protected T findOneResult(String jpql, Map<String, Object> parameters) {
+        TypedQuery<T> query = em.createQuery(jpql, entityClass);
+        parameters.forEach(query::setParameter);
+        List<T> resultList = query.getResultList();
+        return resultList.isEmpty() ? null : resultList.get(0);
     }
 }

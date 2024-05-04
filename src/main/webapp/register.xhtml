@@ -7,15 +7,14 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="title">
-        Login Page
+        Sign Up Page
     </ui:define>
 
     <ui:define name="content">
 
         <main class="form-signin w-100 m-auto">
             <h:form>
-                <h1 class="h3 mb-3 fw-normal">Welcome to Car Leasing Application</h1>
-                <p class="lead">Please sign in to continue</p>
+                <h1 class="h3 mb-3 fw-normal">Create Your Account</h1>
 
                 <h:panelGroup styleClass="form-floating" layout="block">
                     <h:inputText binding="#{uname}" 
@@ -23,7 +22,7 @@
                                  id="userName" 
                                  p:placeholder="Username"
                                  value="#{loginController.user.userName}" />
-                    <h:outputLabel value="Username" for="userName" />
+                    <h:outputLabel value="User Name" for="userName" />
                     <h:message for="userName" errorStyle="color: red" infoStyle="color: green"/>
                 </h:panelGroup>
 
@@ -37,15 +36,29 @@
                     <h:message for="password" errorStyle="color: red" infoStyle="color: green"/>
                 </h:panelGroup>
 
+                <h:panelGroup styleClass="form-floating" layout="block">
+                    <h:inputText binding="#{fullName}" 
+                                 styleClass="#{fullName.valid ? 'form-control' : 'form-control is-invalid'}" 
+                                 id="fullName" 
+                                 p:placeholder="Full Name"
+                                 value="#{loginController.user.fullName}" />
+                    <h:outputLabel value="Full Name" for="fullName" />
+                    <h:message for="fullName" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="form-floating" layout="block">
+                    <h:inputText binding="#{email}" 
+                                 styleClass="#{email.valid ? 'form-control' : 'form-control is-invalid'}" 
+                                 id="email" 
+                                 p:placeholder="Email"
+                                 value="#{loginController.user.email}" />
+                    <h:outputLabel value="Email" for="email" />
+                    <h:message for="email" errorStyle="color: red" infoStyle="color: green"/>
+                </h:panelGroup>
+
                 <h:commandButton styleClass="btn btn-primary w-100 py-2" 
-                                 value="Sign In" 
-                                 action="#{loginController.doLogin(loginController.user.userName, loginController.user.password)}" />
-                
-                <!-- Signup link -->
-                <p class="mt-3 text-muted text-center">
-                    New to the Car Leasing Application? 
-                    <a href="register.xhtml">Sign Up here</a>
-                </p>
+                 value="Register" 
+                 action="#{loginController.registerUser}" />
 
                 <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
             </h:form>

@@ -63,6 +63,7 @@ public class SalesstaffApptController {
 }
 
     public String scheduleAppointment() {
+        appt.setId(null);
         LOG.info("Inside SalesstaffApptController scheduleAppointment with " + appt.toString());
         AppointmentService.scheduleAppointment(appt);
         swc.refreshSalesstaffModel();
