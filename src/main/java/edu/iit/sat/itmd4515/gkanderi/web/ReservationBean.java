@@ -4,6 +4,7 @@ import edu.iit.sat.itmd4515.gkanderi.domain.Car;
 import edu.iit.sat.itmd4515.gkanderi.domain.Reservation;
 import edu.iit.sat.itmd4515.gkanderi.service.CarService;
 import edu.iit.sat.itmd4515.gkanderi.service.ReservationService;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -11,8 +12,8 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-
+import java.util.List;
+import java.util.logging.Logger;
 
 @Named
 @RequestScoped
@@ -29,6 +30,27 @@ public class ReservationBean {
 
     @Inject
     private ReservationConfirmationBean reservationConfirmationBean;
+
+    private List<Reservation> userReservations;
+
+    @PostConstruct
+public void init() {
+    // Fetch the user's reservations from the database or session
+    // For example:
+    // userReservations = reservationService.findReservationsByUser(currentUser);
+    userReservations = reservationService.getAllReservations(); // Assuming you have a method to get all reservations
+    
+    // Log the retrieved reservations
+    Logger.getLogger(ReservationBean.class.getName()).info("Retrieved " + userReservations.size() + " reservations.");
+}
+
+    public List<Reservation> getUserReservations() {
+        return userReservations;
+    }
+
+    public void setUserReservations(List<Reservation> userReservations) {
+        this.userReservations = userReservations;
+    }
 
     private Long selectedCarId;
     private LocalDate reservationDate;
@@ -69,35 +91,34 @@ public class ReservationBean {
     }
 
     public String reserveCar() {
-    Car selectedCar = defaultWelcomeController.getAvailableCars().stream()
-            .filter(car -> car.getId().equals(selectedCarId))
-            .findFirst()
-            .orElse(null);
+        Car selectedCar = defaultWelcomeController.getAvailableCars().stream()
+                .filter(car -> car.getId().equals(selectedCarId))
+                .findFirst()
+                .orElse(null);
 
-    if (selectedCar != null) {
-        Reservation reservation = new Reservation();
-        reservation.setCar(selectedCar);
-        
-        // Set reservation date and time
-        reservation.setReservationDate(LocalDate.now());
-        reservation.setReservationTime(LocalTime.now());
+        if (selectedCar != null) {
+            Reservation reservation = new Reservation();
+            reservation.setCar(selectedCar);
 
-        reservationService.create(reservation);
+            // Set reservation date and time
+            reservation.setReservationDate(LocalDate.now());
+            reservation.setReservationTime(LocalTime.now());
 
-        // Store the reservation object in the session with the key "reservation"
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reservation", reservation);
+            reservationService.create(reservation);
 
-        // Set the log message using the injected instance of ReservationConfirmationBean
-        reservationConfirmationBean.setLogMessage("Reservation details saved successfully.");
+            // Store the reservation object in the session with the key "reservation"
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("reservation", reservation);
 
-        // Set the reservationMade flag to true
-        reservationMade = true;
+            // Set the log message using the injected instance of ReservationConfirmationBean
+            reservationConfirmationBean.setLogMessage("Reservation details saved successfully.");
 
-        return "/reservationconfirmation.xhtml?faces-redirect=true";
-    } else {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Selected car not found."));
-        return null;
+            // Set the reservationMade flag to true
+            reservationMade = true;
+
+            return "/reservationconfirmation.xhtml?faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Selected car not found."));
+            return null;
+        }
     }
-}
-
 }

@@ -11,6 +11,11 @@ public class ReservationService {
     
     @PersistenceContext(unitName = "itmd4515PU")
     private EntityManager entityManager;
+    
+    public List<Reservation> getAllReservations() {
+        return entityManager.createQuery("SELECT r FROM Reservation r", Reservation.class)
+                             .getResultList();
+    }
 
     public void create(Reservation reservation) {
         entityManager.persist(reservation);
