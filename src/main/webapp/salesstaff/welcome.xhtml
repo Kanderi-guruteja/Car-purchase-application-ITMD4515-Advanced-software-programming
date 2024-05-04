@@ -46,12 +46,12 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Pet Name</f:facet>
+                <f:facet name="header">Car Name</f:facet>
                 <h:outputText value="#{appointment.car.name}"/>
             </h:column>
 
             <h:column>
-                <f:facet name="header">Pet Type</f:facet>
+                <f:facet name="header">Car Type</f:facet>
                 <h:outputText value="#{appointment.car.type}"/>
             </h:column>
 
@@ -62,10 +62,10 @@
 
             <h:column>
                 <h:form>
-                    <h:commandButton value="view" action="#{salesstaffApptController.displayViewApptPage(appt)}"/>
-                    <h:commandButton value="edit" action="#{salesstaffApptController.displayEditApptPage(appt)}"/>
-                    <h:commandButton value="delete" action="#{salesstaffApptController.displayDeleteApptPage(appt)}"/>
-                </h:form>
+    <h:commandButton value="view" action="#{salesstaffApptController.displayViewApptPage(appointment)}"/>
+    <h:commandButton value="edit" action="#{salesstaffApptController.displayEditApptPage(appointment)}"/>
+    <h:commandButton value="delete" action="#{salesstaffApptController.displayDeleteApptPage(appointment)}"/>
+</h:form>
             </h:column>
 
         </h:dataTable>

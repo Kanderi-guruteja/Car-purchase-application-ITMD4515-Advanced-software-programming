@@ -30,17 +30,26 @@ public class CarValidationTest {
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
 
+    /**
+     *
+     */
     @BeforeAll
     public static void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void tearDown() {
         validatorFactory.close();
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarName_Success() {
         Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
@@ -49,6 +58,9 @@ public class CarValidationTest {
         System.out.println("Validation passed for Car name");
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarName_Invalid_Blank() {
         Car car = new Car("", LocalDate.now(), CarType.PETROL);
@@ -56,6 +68,9 @@ public class CarValidationTest {
         assertEquals(1, violations.size());
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarBuyDate_Success() {
         Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
@@ -64,6 +79,9 @@ public class CarValidationTest {
         System.out.println("Validation passed for Car buy date");
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarBuyDate_Invalid_FutureDate() {
         Car car = new Car("Audi", LocalDate.now().plusDays(1), CarType.PETROL);
@@ -71,6 +89,9 @@ public class CarValidationTest {
         assertEquals(1, violations.size());
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarType_Success() {
         Car car = new Car("Audi", LocalDate.now(), CarType.PETROL);
@@ -79,6 +100,9 @@ public class CarValidationTest {
         System.out.println("Validation passed for Car type");
     }
 
+    /**
+     *
+     */
     @Test
     public void validateCarType_Invalid_Null() {
         Car car = new Car("Audi", LocalDate.now(), null);

@@ -14,9 +14,9 @@
         <ui:define name="content">
             <h:form>
                 <ezcomp:car
-                    car="#{manufacturerCarController.car}"
+                    car="#{salesstaffApptController.appt}"
                     operation="edit"
-                    action="#{manufacturerCarController.editCar()}"/>
+                    action="#{salesstaffApptController.displayEditApptPage(appt)}"/>
             </h:form>
         </ui:define>
     </ui:composition>

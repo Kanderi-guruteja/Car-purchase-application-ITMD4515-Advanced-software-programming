@@ -12,9 +12,15 @@ import java.util.Map;
  */
 public abstract class AbstractService<T> {
 
+    /**
+     *
+     */
     @PersistenceContext(name = "itmd4515PU")
     protected EntityManager em;
-
+    
+    /**
+     *
+     */
     protected Class<T> entityClass;
 
     /**

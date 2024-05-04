@@ -25,8 +25,9 @@ import org.junit.jupiter.api.Test;
 
 public class CarJPATest extends AbstractJPATest{
 
-   
-
+    /**
+     *
+     */
     @Test
     public void createTest() {
         Car c2 = new Car("merc", LocalDate.of(2022, 12, 10), CarType.PETROL);
@@ -45,6 +46,9 @@ public class CarJPATest extends AbstractJPATest{
         assertEquals(c2.getId(), readBackFromDatabaseForAssertion.getId());
         }
 
+    /**
+     *
+     */
     @Test
     public void readTest() {
          
@@ -65,6 +69,9 @@ public class CarJPATest extends AbstractJPATest{
     System.out.println("Type: " + car.getType());
 }
 
+    /**
+     *
+     */
     @Test
     public void upadteTest() { 
         
@@ -84,6 +91,9 @@ public class CarJPATest extends AbstractJPATest{
          
     }
 
+    /**
+     *
+     */
     @Test
     public void deleteTest() { 
           Car audi = em.createQuery("SELECT c FROM Car c WHERE c.name = :name", Car.class)
@@ -103,12 +113,18 @@ public class CarJPATest extends AbstractJPATest{
         Assertions.assertNull(deletedAudi, "AUDI entity still exists after deletion"); 
     }
     
+    /**
+     *
+     */
     @Test
     public void uniDirectionalRelationshipTest(){
     
     
     }
     
+    /**
+     *
+     */
     @Test
     public void biDirectionalRelationshipTest(){}
     

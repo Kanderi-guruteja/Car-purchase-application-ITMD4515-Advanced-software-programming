@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../WEB-INF/templates/authenticatedTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Edit Appointment
+    </ui:define>
+
+    <ui:define name="content">
+        <h2>Edit Appointment</h2>
+        <h:form id="editApptForm">
+
+            <h:messages globalOnly="true" styleClass="error"/>
+
+            <h:inputHidden id="apptId" value="#{salesstaffApptController.appt.id}"/>
+
+            <h:outputLabel for="apptDate">Appointment Date:</h:outputLabel>
+            <h:inputText id="apptDate" value="#{salesstaffApptController.appt.date}">
+                <f:convertDateTime pattern="yyyy-MM-dd"/>
+            </h:inputText>
+            <br/>
+
+            <h:outputLabel for="apptTime">Appointment Time:</h:outputLabel>
+            <h:inputText id="apptTime" value="#{salesstaffApptController.appt.time}">
+                <f:convertDateTime pattern="HH:mm:ss"/>
+            </h:inputText>
+            <br/>
+
+            <!-- Add more fields for editing other attributes of the appointment -->
+            <!-- Example: Manufacturer, Car, etc. -->
+
+            <h:commandButton value="Save" action="#{salesstaffApptController.saveAppointment}" />
+            <h:commandButton value="Cancel" action="#{salesstaffApptController.cancelEdit}" immediate="true" />
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

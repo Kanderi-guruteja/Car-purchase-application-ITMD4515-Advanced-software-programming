@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
  * @author 18722
  */
 public class JPARelationshipTest extends AbstractJPATest{
+
+    /**
+     *
+     */
     @Test
     public void uniDirectionalRelationshipTest(){
         Leasingoffice l = new Leasingoffice("Priority Car Leasing"); // Remove the extra space here   
@@ -31,7 +35,9 @@ public class JPARelationshipTest extends AbstractJPATest{
                 
     }
     
-   
+    /**
+     *
+     */
     @Test
     public void biDirectionalRelationshipTest1(){
         // Existing functionality
@@ -71,6 +77,9 @@ public class JPARelationshipTest extends AbstractJPATest{
         System.out.println("Leasing office from database: " + newManufacturerFromDB.getLeasingoffice());
         assertEquals("Chicago Car Leasing Office", newManufacturerFromDB.getLeasingoffice().getLeasingofficeName().trim());}
     
+    /**
+     *
+     */
     public void biDirectionalRelationshipTest2(){
         Leasingoffice leasingoffice = new Leasingoffice("Chicago Car Leasing office");
         Salesstaff salesstaff = new Salesstaff("Priority salesstaff");

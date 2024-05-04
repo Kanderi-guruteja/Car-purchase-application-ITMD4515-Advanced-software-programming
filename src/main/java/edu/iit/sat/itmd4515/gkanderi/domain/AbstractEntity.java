@@ -60,6 +60,8 @@ public class AbstractEntity {
     public void initializeModifiedTimestamp() {
         this.modifiedTimestamp = LocalDateTime.now();
     }
+    
+    
 
     /**
      * Get the value of modifiedTimestamp.
@@ -132,4 +134,6 @@ public class AbstractEntity {
     public void setId(Long id) {
         this.id = id;
     }
+
+   
 }

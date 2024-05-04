@@ -21,14 +21,28 @@ import org.junit.jupiter.api.BeforeEach;
 public class AbstractJPATest {
     
      private static EntityManagerFactory emf;
+
+    /**
+     *
+     */
     protected EntityManager em;
+
+    /**
+     *
+     */
     protected EntityTransaction tx;
 
+    /**
+     *
+     */
     @BeforeAll
     public static void beforeALL() {
         emf = Persistence.createEntityManagerFactory("itmd4515testPU");
     }
 
+    /**
+     *
+     */
     @BeforeEach
     public void beforeEach() {
         em = emf.createEntityManager();
@@ -41,6 +55,9 @@ public class AbstractJPATest {
         tx.commit();
     }
     
+    /**
+     *
+     */
     @AfterEach
     public void afterEach() {
         
@@ -52,6 +69,9 @@ public class AbstractJPATest {
         tx.commit();
     }
 
+    /**
+     *
+     */
     @AfterAll
     public static void afterALL() {
         emf.close();

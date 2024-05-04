@@ -52,7 +52,7 @@ public class AppointmentService extends AbstractService<Appointment> {
     newAppt.schedAppt(
             em.getReference(Manufacturer.class, 1L), 
             em.getReference(Car.class, 1L), 
-            em.getReference(Salesstaff.class, appt.getSalesstaff().getId())
+            em.getReference(Salesstaff.class, 1L)
     );
     
     // Persist the new appointment in the database
@@ -61,4 +61,12 @@ public class AppointmentService extends AbstractService<Appointment> {
     // Update the ID of the original appointment with the ID of the newly created one
     appt.setId(newAppt.getId());
 }
+
+    /**
+     *
+     * @param appt
+     */
+    public void updateAppointment(Appointment appt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

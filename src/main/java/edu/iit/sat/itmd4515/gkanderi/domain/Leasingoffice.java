@@ -108,11 +108,20 @@ public class Leasingoffice extends AbstractEntity {
         this.leasingofficeName = leasingofficeName;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, leasingofficeName);
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -126,6 +135,10 @@ public class Leasingoffice extends AbstractEntity {
                 && Objects.equals(leasingofficeName, that.leasingofficeName);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Leasingoffice{"

@@ -7,6 +7,10 @@ package edu.iit.sat.itmd4515.gkanderi.config;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.enterprise.context.ApplicationScoped;
 
+/**
+ *
+ * @author 18722
+ */
 @ApplicationScoped
 @DataSourceDefinition(
         name = "java:app/jdbc/itmd4515DS",

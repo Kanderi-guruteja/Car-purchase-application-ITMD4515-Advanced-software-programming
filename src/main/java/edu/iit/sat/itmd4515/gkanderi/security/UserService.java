@@ -1,5 +1,6 @@
 package edu.iit.sat.itmd4515.gkanderi.security;
 
+import edu.iit.sat.itmd4515.gkanderi.security.User;
 import edu.iit.sat.itmd4515.gkanderi.service.AbstractService;
 import jakarta.ejb.Stateless;
 import java.util.List;
@@ -25,7 +26,16 @@ public class UserService extends AbstractService<User> {
      * 
      * @return A list of all users.
      */
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return super.findAll("User.findAll");
+    }
+
+    /**
+     * Creates a new user in the database.
+     * 
+     * @param user The user to be created.
+     */
+    public void createUser(User user) {
+        super.create(user);
     }
 }

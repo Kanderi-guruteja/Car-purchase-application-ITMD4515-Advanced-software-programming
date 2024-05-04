@@ -44,66 +44,129 @@ public class User {
     private List<Group> groups = new ArrayList<>();
 
     // Constructors
+
+    /**
+     *
+     * @param userName
+     * @param password
+     */
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
 
+    /**
+     *
+     */
     public User() {
     }
 
     // Getters and setters for fullName
+
+    /**
+     *
+     * @return
+     */
     public String getFullName() {
         return fullName;
     }
 
+    /**
+     *
+     * @param fullName
+     */
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
     // Getters and setters for email
+
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
     // Methods to manage user groups
+
+    /**
+     *
+     * @param g
+     */
     public void addGroup(Group g) {
         this.groups.add(g);
         g.getUsers().add(this);
     }
 
+    /**
+     *
+     * @param g
+     */
     public void removeGroup(Group g) {
         this.groups.remove(g);
         g.getUsers().remove(this);
     }
 
     // Getters and setters for userName
+
+    /**
+     *
+     * @return
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     // Getters and setters for password
+
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
     // Getters and setters for groups
+
+    /**
+     *
+     * @return
+     */
     public List<Group> getGroups() {
         return groups;
     }
 
+    /**
+     *
+     * @param groups
+     */
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }

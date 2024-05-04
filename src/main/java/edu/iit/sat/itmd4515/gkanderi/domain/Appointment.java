@@ -160,11 +160,19 @@ public class Appointment extends AbstractEntity {
         this.salesstaff = null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Appointment{" + "Id=" + id + ", date=" + date + ", time=" + time + manufacturer.getId() + car.getId() + salesstaff.getId() + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -172,6 +180,11 @@ public class Appointment extends AbstractEntity {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -13,6 +13,10 @@
     <ui:define name="content">
         Welcome #{loginController.authenticatedUser}! to the Admin section of the Car Purchase application
 
+        <!-- Form to create a new user -->
+       
+        
+        <!-- DataTable to display cars -->
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{carService.findAll()}" 
@@ -33,7 +37,7 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Car BD</f:facet>
+                <f:facet name="header">Car Bought on</f:facet>
                 <h:outputText value="#{car.buyDate}">
                     <f:convertDateTime type="localDate" dateStyle="full"/>
                 </h:outputText>
@@ -53,6 +57,7 @@
 
         </h:dataTable>
 
+        <!-- Error message for non-admin users -->
         <ui:fragment rendered="#{not loginController.isAdmin()}">
             <div class="alert alert-danger" role="alert">
                 Access Denied. You do not have permission to view this content.

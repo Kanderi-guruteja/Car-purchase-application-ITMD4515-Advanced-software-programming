@@ -4,8 +4,16 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+/**
+ *
+ * @author 18722
+ */
 public class EmailSender {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         // Set up mail server properties
         Properties properties = new Properties();

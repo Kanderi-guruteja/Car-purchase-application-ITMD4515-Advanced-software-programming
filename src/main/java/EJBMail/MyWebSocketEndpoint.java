@@ -12,9 +12,18 @@ import jakarta.websocket.OnMessage;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
 
+/**
+ *
+ * @author 18722
+ */
 @ServerEndpoint("/websocket")
 public class MyWebSocketEndpoint {
 
+    /**
+     *
+     * @param message
+     * @param session
+     */
     @OnMessage
     public void onMessage(String message, Session session) {
         // Handle incoming messages
