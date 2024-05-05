@@ -1,0 +1,8 @@
+unnamed package
+edu.iit.sat.itmd4515.gkanderi.config
+edu.iit.sat.itmd4515.gkanderi.domain
+edu.iit.sat.itmd4515.gkanderi.resources
+edu.iit.sat.itmd4515.gkanderi.security
+edu.iit.sat.itmd4515.gkanderi.service
+edu.iit.sat.itmd4515.gkanderi.web
+EJBMail

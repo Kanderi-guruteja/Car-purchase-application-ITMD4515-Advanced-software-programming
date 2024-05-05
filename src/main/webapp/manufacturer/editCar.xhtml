@@ -2,22 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ezcomp="jakarta.faces.composite/ezcomp">
+      xmlns:ezcomp="jakarta.faces.composite/ezcomp"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:composition template="../WEB-INF/templates/authenticatedTemplate.xhtml">
+  
+        <!-- Define title for the page -->
         <ui:define name="title">
             Edit Car Page
         </ui:define>
 
         <ui:define name="content">
+        
+            <!-- Enclose the components within an h:form -->
             <h:form>
                 <ezcomp:car
-                    car="#{salesstaffApptController.appt}"
+                    car="#{manufacturerCarController.car}"
                     operation="edit"
-                    action="#{salesstaffApptController.displayEditApptPage(appt)}"/>
+                    action="#{manufacturerCarController.editCar()}"/>
             </h:form>
+        
         </ui:define>
+
     </ui:composition>
 </html>

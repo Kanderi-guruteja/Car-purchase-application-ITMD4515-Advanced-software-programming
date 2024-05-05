@@ -165,9 +165,15 @@ public class Appointment extends AbstractEntity {
      * @return
      */
     @Override
-    public String toString() {
-        return "Appointment{" + "Id=" + id + ", date=" + date + ", time=" + time + manufacturer.getId() + car.getId() + salesstaff.getId() + '}';
-    }
+public String toString() {
+    String salesstaffInfo = (salesstaff != null) ? "Salesstaff ID: " + salesstaff.getId() : "Salesstaff: null";
+    return "Appointment{" +
+            "id=" + id +
+            ", date=" + date +
+            ", time=" + time +
+            ", " + salesstaffInfo +
+            "}";
+}
 
     /**
      *

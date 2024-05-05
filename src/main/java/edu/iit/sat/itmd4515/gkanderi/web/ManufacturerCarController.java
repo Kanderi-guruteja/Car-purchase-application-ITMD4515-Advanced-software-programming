@@ -94,12 +94,17 @@ public class ManufacturerCarController {
      * 
      * @return The outcome page after saving the car.
      */
-    public String saveCar() {
+   public String saveCar() {
         LOG.info("saveCar has been invoked with model: " + this.car.toString());
+
+        
         ManufacturerService.createCarForManufacturer(mwc.getManufacturer(), car);
+
         LOG.info("saveCar after calling service layer: " + this.car.toString());
+
         mwc.refreshManufacturerModel();
-        return "welcome.xhtml";
+        
+        return "/manufacturer/welcome.xhtml";
     }
 
     /**
@@ -107,15 +112,13 @@ public class ManufacturerCarController {
      * 
      * @return The outcome page after editing the car.
      */
-    public String editCar() {
+    public String editCar(){
         LOG.info("editCar has been invoked with model: " + this.car.toString());
-        if (this.car.getId() != null) {
-            LOG.info("Car ID: " + this.car.getId());
-            CarService.editCarForExistingManufacturer(car);
-            mwc.refreshManufacturerModel();
-        } else {
-            LOG.warning("Cannot edit car. Car ID is null.");
-        }
+        
+        CarService.editCarForExistingManufacturer(car);
+
+        mwc.refreshManufacturerModel();
+        
         return "/manufacturer/welcome.xhtml";
     }
 
@@ -124,11 +127,16 @@ public class ManufacturerCarController {
      * 
      * @return The outcome page after deleting the car.
      */
-    public String deleteCar() {
+     /**
+ * Deletes the car.
+ * 
+ * @return The outcome page after deleting the car.
+ */
+public String deleteCar(){
         LOG.info("deleteCar has been invoked with model: " + this.car.toString());
+        
         return "/manufacturer/welcome.xhtml";
     }
-
     /**
      * Retrieves the car.
      * 

@@ -16,6 +16,9 @@ import jakarta.faces.convert.FacesConverter;
  * 
  * @author 18722
  */
+/**
+ * This class implements the Converter{@link Car} interface provided by JavaServer Faces (JSF).
+ */
 @FacesConverter(value = "carConverter", managed = true)
 public class CarConverter implements Converter<Car> {
 
