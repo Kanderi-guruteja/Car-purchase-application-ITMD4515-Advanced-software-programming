@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * @author 18722
+ */
+
+/**
  * An abstract service class providing basic CRUD operations for entities.
  * @param <T> The type of entity managed by this service.
  */

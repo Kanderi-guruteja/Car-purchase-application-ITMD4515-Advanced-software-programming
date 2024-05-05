@@ -17,6 +17,10 @@ import jakarta.ejb.Startup;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Logger;
+/**
+ *
+ * @author 18722
+ */
 
 /**
  * Initializes the database with sample data upon application startup.
